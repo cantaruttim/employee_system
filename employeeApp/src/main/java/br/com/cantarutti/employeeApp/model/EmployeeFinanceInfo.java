@@ -6,4 +6,9 @@ public class EmployeeFinanceInfo {
     private String roleName;
     private Double baseSalary;
 
+
+    public Double promotion(Double taxIncrease) {
+        return this.baseSalary = (baseSalary + (baseSalary * taxIncrease));
+    }
+
 }
