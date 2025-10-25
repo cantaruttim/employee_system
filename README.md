@@ -1,6 +1,6 @@
 An small aplication that we can see our location on map
 
-# Parts of a System
+# System
 Build in two parts. Front and Backend.
 
 - On front side, we would see a menu where we can specify what we would like to see (Finance Report, CheckIn/CheckOut of an employee). On CheckIn and CheckOut parts we would see where on the map we are right now!
