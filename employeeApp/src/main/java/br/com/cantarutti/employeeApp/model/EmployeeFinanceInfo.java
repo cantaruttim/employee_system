@@ -39,7 +39,7 @@ public class EmployeeFinanceInfo {
         this.baseSalary = baseSalary;
     }
 
-    public Double promotion(Double taxIncrease) {
+    public Double getSalaryByPromotion(Double taxIncrease) {
         return this.baseSalary = (baseSalary + (baseSalary * taxIncrease));
     }
 

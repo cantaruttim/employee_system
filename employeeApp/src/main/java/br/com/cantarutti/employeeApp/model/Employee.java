@@ -12,7 +12,15 @@ public class Employee {
     private EmployeeFinanceInfo financeInfo;
 
     // Construtores
-    public Employee() {
+    public Employee() {}
+
+    public Employee(String registrationNumber, String name, LocalDate dateContract, EmployeeAddress address, EmployeeFinanceInfo financeInfo) {
+        this.registrationNumber = registrationNumber;
+        this.name = name;
+        this.dateContract = dateContract;
+        this.address = address;
+        this.financeInfo = financeInfo;
+
     }
 
     public Employee(String registrationNumber, String name, LocalDate dateContract) {
