@@ -20,22 +20,6 @@ public class Employee {
         this.dateContract = dateContract;
     }
 
-    // Método auxiliar para configurar o address
-    public void setAddress(EmployeeAddress address) {
-        this.address = address;
-        if (address != null) {
-            address.setEmployee(this); // Mantém a consistência bidirecional
-        }
-    }
-
-    // Método auxiliar para configurar o financeInfo
-    public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
-        this.financeInfo = financeInfo;
-        if (financeInfo != null) {
-            financeInfo.setEmployee(this); // Mantém a consistência bidirecional
-        }
-    }
-
     // Getters e Setters
     public String getRegistrationNumber() {
         return registrationNumber;
