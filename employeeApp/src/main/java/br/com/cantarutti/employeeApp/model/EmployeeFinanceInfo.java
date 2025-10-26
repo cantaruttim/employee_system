@@ -8,6 +8,13 @@ public class EmployeeFinanceInfo {
     private String roleName;
     private Double baseSalary;
 
+    public EmployeeFinanceInfo (String reg, String roleName, Double baseSalary) {
+        this.registrationNumber = reg;
+        this.roleName = roleName;
+        this.baseSalary = baseSalary;
+    }
+    public EmployeeFinanceInfo () {}
+
     public String getRegistrationNumber() {
         return registrationNumber;
     }
@@ -31,14 +38,6 @@ public class EmployeeFinanceInfo {
     public void setBaseSalary(Double baseSalary) {
         this.baseSalary = baseSalary;
     }
-
-    public EmployeeFinanceInfo (String reg, String roleName, Double baseSalary) {
-        this.registrationNumber = reg;
-        this.roleName = roleName;
-        this.baseSalary = baseSalary;
-    }
-
-    public EmployeeFinanceInfo () {}
 
     public Double promotion(Double taxIncrease) {
         return this.baseSalary = (baseSalary + (baseSalary * taxIncrease));
