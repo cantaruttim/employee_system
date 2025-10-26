@@ -1,6 +1,7 @@
 package br.com.cantarutti.employeeApp.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Employee {
 
@@ -60,6 +61,17 @@ public class Employee {
                 ", name='" + name + '\'' +
                 ", dateContract=" + dateContract +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Employee employee)) return false;
+        return Objects.equals(getRegistrationNumber(), employee.getRegistrationNumber()) && Objects.equals(getName(), employee.getName()) && Objects.equals(getDateContract(), employee.getDateContract()) && Objects.equals(getAddress(), employee.getAddress()) && Objects.equals(getFinanceInfo(), employee.getFinanceInfo());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRegistrationNumber(), getName(), getDateContract(), getAddress(), getFinanceInfo());
     }
 }
 
