@@ -22,6 +22,8 @@ public class EmployeeMapper {
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setName(dto.getName());
         employee.setDateContract(dto.getDateContract());
+        employee.setLat(dto.getLat());
+        employee.setLon(dto.getLon());
 
         // Address
         if (dto.getAddress() != null) {
@@ -52,6 +54,8 @@ public class EmployeeMapper {
         dto.setRegistrationNumber(employee.getRegistrationNumber());
         dto.setName(employee.getName());
         dto.setDateContract(employee.getDateContract());
+        dto.setLat(employee.getLat());
+        dto.setLon(employee.getLon());
 
         if (employee.getAddress() != null) {
             EmployeeAddressDTO addrDTO = new EmployeeAddressDTO();

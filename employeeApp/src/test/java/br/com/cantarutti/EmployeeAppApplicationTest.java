@@ -90,22 +90,27 @@ public class EmployeeAppApplicationTest {
         UUID id = UUID.randomUUID();
         Employee employee = new Employee();
         employee.setId(id);
+        employee.setLat(-23.55);
+        employee.setLon(-46.63);
         employee.setName("Alice");
+        System.out.printf("Started Position");
+        System.out.printf("Employee: " + employee.getName() + "\n" + "POSITION: " + "\n" + "  Lat: " + employee.getLat() + "\n" + "  Lon: " +  employee.getLon() );
 
         // Mock do findById
         when(repository.findById(id)).thenReturn(Optional.of(employee));
-
         // Mock do save, retornando o próprio employee
         when(repository.save(any(Employee.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        EmployeeDTO result = service.updatedLocation(id, -23.55, -46.63);
+        EmployeeDTO result = service.updatedLocation(id, -20.00, -35.18);
 
-        // Verifica se os valores foram atualizados corretamente
-        assertEquals(-23.55, result.getLat(), 0.0001);
-        assertEquals(-46.63, result.getLon(), 0.0001);
+        assertEquals(-20.00, result.getLat());
+        assertEquals(-35.18, result.getLon());
 
-        // Verifica se o save foi chamado no repository
         verify(repository).save(any(Employee.class));
+
+        System.out.printf("\nEnded Position");
+        System.out.printf("Employee: " + result.getName() + "\n" + "POSITION: " + "\n" + "  Lat: " + result.getLat() + "\n" + "  Lon: " +  result.getLon() );
+
     }
 
 
