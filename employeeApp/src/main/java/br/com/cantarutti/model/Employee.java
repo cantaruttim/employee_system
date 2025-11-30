@@ -1,4 +1,4 @@
-package br.com.cantarutti.employeeApp.model;
+package br.com.cantarutti.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
