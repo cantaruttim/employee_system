@@ -1,14 +1,14 @@
 package br.com.cantarutti.data;
 
-public class EmployeeAdressDTO {
+public class EmployeeAddressDTO {
 
     private String address;
     private String zipcode;
     private String city;
 
-    public EmployeeAdressDTO(){}
+    public EmployeeAddressDTO(){}
 
-    public EmployeeAdressDTO(String address, String zipcode, String city) {
+    public EmployeeAddressDTO(String address, String zipcode, String city) {
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;

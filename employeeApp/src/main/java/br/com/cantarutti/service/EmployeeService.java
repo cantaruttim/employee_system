@@ -11,6 +11,9 @@ import br.com.cantarutti.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
@@ -18,6 +21,83 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepo;
     private final EmployeeAddressRepository addressRepo;
     private final EmployeeFinanceInfoRepository financeRepo;
+
+    // -------------------------------------------------------------
+    // CREATE
+    // -------------------------------------------------------------
+    public EmployeeDTO save(EmployeeDTO dto) {
+        Employee employee = EmployeeMapper.toEntity(dto);
+        Employee saved = employeeRepo.save(employee);
+        return EmployeeMapper.toDTO(saved);
+    }
+
+    // -------------------------------------------------------------
+    // LIST ALL
+    // -------------------------------------------------------------
+    public List<EmployeeDTO> listAll() {
+        return employeeRepo
+                .findAll()
+                .stream()
+                .map(EmployeeMapper::toDTO)
+                .toList();
+    }
+
+    // -------------------------------------------------------------
+    // FIND BY ID
+    // -------------------------------------------------------------
+    public EmployeeDTO findById(UUID id) {
+        Employee employee = employeeRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+
+        return EmployeeMapper.toDTO(employee);
+    }
+
+    // -------------------------------------------------------------
+    // UPDATE
+    // -------------------------------------------------------------
+    public EmployeeDTO update(UUID id, EmployeeDTO dto) {
+
+        Employee employee = employeeRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+
+        employee.setName(dto.getName());
+        employee.setRegistrationNumber(dto.getRegistrationNumber());
+        employee.setDateContract(dto.getDateContract());
+
+        var address = employee.getAddress();
+        var addressDTO = dto.getAddress();
+        address.setAddress(addressDTO.getAddress());
+        address.setCity(addressDTO.getCity());
+        address.setZipCode(addressDTO.getZipCode());
+
+        var finance = employee.getFinanceInfo();
+        var financeDTO = dto.getFinanceInfo();
+        finance.setBaseSalary(financeDTO.getBaseSalary());
+        finance.setRoleName(financeDTO.getRoleName());
+
+        addressRepo.save(address);
+        financeRepo.save(finance);
+        employeeRepo.save(employee);
+
+        return EmployeeMapper.toDTO(employee);
+    }
+
+    // -------------------------------------------------------------
+    // DELETE
+    // -------------------------------------------------------------
+    public void delete(UUID id) {
+
+        Employee employee = employeeRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+
+        // Remove dependências primeiro
+        addressRepo.delete((EmployeeAddress) employee.getAddress());
+        financeRepo.delete((EmployeeFinanceInfo) employee.getFinanceInfo());
+
+        // Depois remove o employee
+        employeeRepo.delete(employee);
+    }
+
 
     public Employee createEmployee(EmployeeDTO dto) {
 
@@ -42,11 +122,6 @@ public class EmployeeService {
         return employeeRepo.save(employee);
     }
 
-    public EmployeeDTO save(EmployeeDTO dto) {
-        Employee employee = EmployeeMapper.toEntity(dto);
-        Employee saved = employeeRepo.save(employee);
-        return EmployeeMapper.toDTO(saved);
-    }
 
 
 }

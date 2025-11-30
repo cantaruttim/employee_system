@@ -1,6 +1,6 @@
 package br.com.cantarutti.config.mapper;
 
-import br.com.cantarutti.data.EmployeeAdressDTO;
+import br.com.cantarutti.data.EmployeeAddressDTO;
 import br.com.cantarutti.data.EmployeeDTO;
 import br.com.cantarutti.data.EmployeeFinanceInfoDTO;
 import br.com.cantarutti.model.Employee;
@@ -50,7 +50,7 @@ public class EmployeeMapper {
         dto.setDateContract(employee.getDateContract());
 
         if (employee.getAddress() != null) {
-            EmployeeAdressDTO addrDTO = new EmployeeAdressDTO();
+            EmployeeAddressDTO addrDTO = new EmployeeAddressDTO();
             addrDTO.setAddress(employee.getAddress().getAddress());
             addrDTO.setZipCode(employee.getAddress().getZipCode());
             addrDTO.setCity(employee.getAddress().getCity());

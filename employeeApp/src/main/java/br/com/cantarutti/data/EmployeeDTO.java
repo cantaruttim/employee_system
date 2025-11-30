@@ -1,7 +1,5 @@
 package br.com.cantarutti.data;
 
-import br.com.cantarutti.model.EmployeeAddress;
-import br.com.cantarutti.model.EmployeeFinanceInfo;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,20 +11,13 @@ public class EmployeeDTO {
     private String registrationNumber;
     private String name;
     private LocalDate dateContract;
-    private EmployeeAddress address;
-    private EmployeeFinanceInfo financeInfo;
+    private EmployeeAddressDTO address;
+    private EmployeeFinanceInfoDTO financeInfo;
 
     public EmployeeDTO() {};
 
-    public EmployeeDTO(
-            UUID id,
-            String registrationNumber,
-            String name,
-            LocalDate dateContract,
-            EmployeeAddress address,
-            EmployeeFinanceInfo financeInfo
-    ) {
 
+    public EmployeeDTO(UUID id, String registrationNumber, String name, LocalDate dateContract, EmployeeAddressDTO address, EmployeeFinanceInfoDTO financeInfo) {
         this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;
@@ -67,7 +58,7 @@ public class EmployeeDTO {
         this.dateContract = dateContract;
     }
 
-    public EmployeeAddress getAddress() {
+    public EmployeeAddressDTO getAddress() {
         return address;
     }
 
@@ -75,7 +66,7 @@ public class EmployeeDTO {
         this.address = address;
     }
 
-    public EmployeeFinanceInfo getFinanceInfo() {
+    public EmployeeFinanceInfoDTO getFinanceInfo() {
         return financeInfo;
     }
 

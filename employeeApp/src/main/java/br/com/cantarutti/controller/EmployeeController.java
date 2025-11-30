@@ -4,10 +4,10 @@ import br.com.cantarutti.data.EmployeeDTO;
 import br.com.cantarutti.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/employees")
@@ -22,7 +22,34 @@ public class EmployeeController {
             @RequestBody EmployeeDTO dto
     ) {
         EmployeeDTO saved = service.save(dto);
-        return ResponseEntity.ok(saved);
+        return ResponseEntity.status(201).body(saved);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<EmployeeDTO>> listAll() {
+        List<EmployeeDTO> list = service.listAll();
+        return ResponseEntity.ok(list);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmployeeDTO> getById(
+            @PathVariable UUID id
+    ) {
+        EmployeeDTO dto = service.findById(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeDTO> update(@PathVariable UUID id,
+                                              @RequestBody EmployeeDTO dto) {
+        EmployeeDTO updated = service.update(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
