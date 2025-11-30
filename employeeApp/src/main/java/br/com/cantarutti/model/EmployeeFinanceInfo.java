@@ -9,8 +9,7 @@ import java.util.UUID;
 public class EmployeeFinanceInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private String registrationNumber;
     private String roleName;

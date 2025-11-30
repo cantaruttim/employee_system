@@ -11,8 +11,7 @@ import java.util.UUID;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private String registrationNumber;
     private String name;
@@ -29,7 +28,8 @@ public class Employee {
     // Construtores
     public Employee() {}
 
-    public Employee(String registrationNumber, String name, LocalDate dateContract, EmployeeAddress address, EmployeeFinanceInfo financeInfo) {
+    public Employee(UUID id, String registrationNumber, String name, LocalDate dateContract, EmployeeAddress address, EmployeeFinanceInfo financeInfo) {
+        this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;
         this.dateContract = dateContract;
@@ -38,13 +38,6 @@ public class Employee {
 
     }
 
-    public Employee(String registrationNumber, String name, LocalDate dateContract) {
-        this.registrationNumber = registrationNumber;
-        this.name = name;
-        this.dateContract = dateContract;
-    }
-
-    // Getters e Setters
     public UUID getId() {
         return id;
     }
@@ -81,18 +74,16 @@ public class Employee {
         return address;
     }
 
+    public void setAddress(EmployeeAddress address) {
+        this.address = address;
+    }
+
     public EmployeeFinanceInfo getFinanceInfo() {
         return financeInfo;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "registrationNumber='" + registrationNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", dateContract=" + dateContract +
-                '}';
+    public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
+        this.financeInfo = financeInfo;
     }
-
 }
 

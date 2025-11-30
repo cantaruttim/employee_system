@@ -10,9 +10,8 @@ import java.util.UUID;
 public class EmployeeAddress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
-    
+    private UUID id = UUID.randomUUID();
+
     private String registrationNumber;
     private String address;
     private String zipcode;
