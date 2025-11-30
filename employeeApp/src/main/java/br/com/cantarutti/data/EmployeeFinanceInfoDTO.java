@@ -1,9 +1,5 @@
 package br.com.cantarutti.data;
 
-
-import jakarta.persistence.Entity;
-
-@Entity(name="tb_finance")
 public class EmployeeFinanceInfoDTO {
 
     private String roleName;
