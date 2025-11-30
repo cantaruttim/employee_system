@@ -12,7 +12,6 @@ public class EmployeeAddress {
     @Id
     private UUID id = UUID.randomUUID();
 
-    private String registrationNumber;
     private String address;
     private String zipcode;
     private String city;
@@ -25,14 +24,6 @@ public class EmployeeAddress {
         this.id = id;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -41,11 +32,11 @@ public class EmployeeAddress {
         this.address = address;
     }
 
-    public String getZipcode() {
+    public String getZipCode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
+    public void setZipCode(String zipcode) {
         this.zipcode = zipcode;
     }
 

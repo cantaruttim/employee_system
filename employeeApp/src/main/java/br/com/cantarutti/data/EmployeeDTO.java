@@ -26,6 +26,7 @@ public class EmployeeDTO {
             EmployeeAddress address,
             EmployeeFinanceInfo financeInfo
     ) {
+
         this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;
@@ -70,7 +71,7 @@ public class EmployeeDTO {
         return address;
     }
 
-    public void setAddress(EmployeeAddress address) {
+    public void setAddress(EmployeeAddressDTO address) {
         this.address = address;
     }
 
@@ -78,7 +79,7 @@ public class EmployeeDTO {
         return financeInfo;
     }
 
-    public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
+    public void setFinanceInfo(EmployeeFinanceInfoDTO financeInfo) {
         this.financeInfo = financeInfo;
     }
 }

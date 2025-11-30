@@ -6,23 +6,14 @@ import jakarta.persistence.Entity;
 @Entity(name="tb_finance")
 public class EmployeeFinanceInfoDTO {
 
-    private String registrationNumber;
     private String roleName;
     private Double baseSalary;
 
-    public EmployeeFinanceInfoDTO(){}
-    public EmployeeFinanceInfoDTO(String registrationNumber, String roleName, Double baseSalary) {
-        this.registrationNumber = registrationNumber;
+    public EmployeeFinanceInfoDTO() {};
+
+    public EmployeeFinanceInfoDTO(String roleName, Double baseSalary) {
         this.roleName = roleName;
         this.baseSalary = baseSalary;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
     }
 
     public String getRoleName() {

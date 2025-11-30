@@ -11,16 +11,15 @@ public class EmployeeFinanceInfo {
     @Id
     private UUID id = UUID.randomUUID();
 
-    private String registrationNumber;
     private String roleName;
     private Double baseSalary;
 
-    public EmployeeFinanceInfo (String reg, String roleName, Double baseSalary) {
-        this.registrationNumber = reg;
+    public EmployeeFinanceInfo() {};
+
+    public EmployeeFinanceInfo (String roleName, Double baseSalary) {
         this.roleName = roleName;
         this.baseSalary = baseSalary;
     }
-    public EmployeeFinanceInfo () {}
 
     public UUID getId() {
         return id;
@@ -28,14 +27,6 @@ public class EmployeeFinanceInfo {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
-
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
     }
 
     public String getRoleName() {
@@ -52,9 +43,5 @@ public class EmployeeFinanceInfo {
 
     public void setBaseSalary(Double baseSalary) {
         this.baseSalary = baseSalary;
-    }
-
-    public Double getSalaryByPromotion(Double taxIncrease) {
-        return this.baseSalary = (baseSalary + (baseSalary * taxIncrease));
     }
 }
