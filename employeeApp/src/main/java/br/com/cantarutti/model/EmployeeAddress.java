@@ -11,7 +11,8 @@ import java.util.UUID;
 public class EmployeeAddress {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id ;
 
     private String address;
     private String zipcode;

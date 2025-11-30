@@ -9,7 +9,8 @@ import java.util.UUID;
 public class EmployeeFinanceInfo {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id ;
 
     private String roleName;
     private Double baseSalary;

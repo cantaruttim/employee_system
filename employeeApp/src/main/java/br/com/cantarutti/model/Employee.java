@@ -11,7 +11,8 @@ import java.util.UUID;
 public class Employee {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private String registrationNumber;
     private String name;
