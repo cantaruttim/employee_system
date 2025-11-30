@@ -1,5 +1,8 @@
 package br.com.cantarutti.data;
 
+import jakarta.persistence.Entity;
+
+@Entity(name="tb_address")
 public class EmployeeAdressDTO {
 
     private String registrationNumber;
