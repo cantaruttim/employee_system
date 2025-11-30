@@ -17,6 +17,5 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger
-    operationsSorter: method
-    tagsSorter: alpha
-    display-request-duration: true
+  api-docs:
+    path: /v3/api-docs

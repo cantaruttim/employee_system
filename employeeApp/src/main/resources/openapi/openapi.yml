@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Employee System API
+  description: API para gerenciamento de funcionários, endereços e dados financeiros
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local development
+
+paths:
+  /api/v1/employees:
+    get:
+      summary: Lista todos os funcionários
+      tags:
+        - Employees
+      responses:
+        "200":
+          description: Lista de funcionários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmployeeDTO"
+
+    post:
+      summary: Cria um novo funcionário completo (dados, endereço e finanças)
+      tags:
+        - Employees
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeDTO"
+      responses:
+        "201":
+          description: Funcionário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeDTO"
+
+  /api/v1/employees/{id}:
+    get:
+      summary: Recupera funcionário por ID
+      tags:
+        - Employees
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: ID do funcionário
+      responses:
+        "200":
+          description: Funcionário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeDTO"
+        "404":
+          description: Funcionário não encontrado
+
+    put:
+      summary: Atualiza um funcionário existente
+      tags:
+        - Employees
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: ID do funcionário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeDTO"
+      responses:
+        "200":
+          description: Funcionário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmployeeDTO"
+        "404":
+          description: Funcionário não encontrado
+
+    delete:
+      summary: Remove um funcionário
+      tags:
+        - Employees
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: ID do funcionário
+      responses:
+        "204":
+          description: Funcionário removido com sucesso
+        "404":
+          description: Funcionário não encontrado
+
+components:
+  schemas:
+    EmployeeDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        registrationNumber:
+          type: string
+          example: "EMP-00123"
+        name:
+          type: string
+          example: "Matheus Cantarutti"
+        dateContract:
+          type: string
+          format: date
+          example: "2025-11-30"
+        address:
+          $ref: "#/components/schemas/EmployeeAddressDTO"
+        financeInfo:
+          $ref: "#/components/schemas/EmployeeFinanceInfoDTO"
+      required:
+        - registrationNumber
+        - name
+        - dateContract
+        - address
+        - financeInfo
+
+    EmployeeAddressDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        registrationNumber:
+          type: string
+          example: "EMP-00123"
+        address:
+          type: string
+          example: "Rua das Flores, 123"
+        zipcode:
+          type: string
+          example: "12345-678"
+        city:
+          type: string
+          example: "São Paulo"
+      required:
+        - registrationNumber
+        - address
+        - zipcode
+        - city
+
+    EmployeeFinanceInfoDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        registrationNumber:
+          type: string
+          example: "EMP-00123"
+        roleName:
+          type: string
+          example: "Developer"
+        baseSalary:
+          type: number
+          format: double
+          example: 4000.00
+      required:
+        - registrationNumber
+        - roleName
+        - baseSalary
