@@ -13,17 +13,31 @@ public class EmployeeDTO {
     private LocalDate dateContract;
     private EmployeeAddressDTO address;
     private EmployeeFinanceInfoDTO financeInfo;
+    private Double lat;
+    private Double lon;
+
 
     public EmployeeDTO() {};
 
 
-    public EmployeeDTO(UUID id, String registrationNumber, String name, LocalDate dateContract, EmployeeAddressDTO address, EmployeeFinanceInfoDTO financeInfo) {
+    public EmployeeDTO(
+            UUID id,
+            String registrationNumber,
+            String name,
+            LocalDate dateContract,
+            EmployeeAddressDTO address,
+            EmployeeFinanceInfoDTO financeInfo,
+            Double lat,
+            Double lon
+    ) {
         this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;
         this.dateContract = dateContract;
         this.address = address;
         this.financeInfo = financeInfo;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public UUID getId() {
@@ -72,5 +86,21 @@ public class EmployeeDTO {
 
     public void setFinanceInfo(EmployeeFinanceInfoDTO financeInfo) {
         this.financeInfo = financeInfo;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
     }
 }
