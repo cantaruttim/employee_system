@@ -21,6 +21,7 @@ public class EmployeeController {
     public ResponseEntity<EmployeeDTO> create(
             @RequestBody EmployeeDTO dto
     ) {
+        dto.setId(null);
         EmployeeDTO saved = service.save(dto);
         return ResponseEntity.status(201).body(saved);
     }

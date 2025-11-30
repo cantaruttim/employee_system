@@ -27,6 +27,7 @@ public class EmployeeService {
     // -------------------------------------------------------------
     public EmployeeDTO save(EmployeeDTO dto) {
         Employee employee = EmployeeMapper.toEntity(dto);
+        employee.setId(null);
         Employee saved = employeeRepo.save(employee);
         return EmployeeMapper.toDTO(saved);
     }
