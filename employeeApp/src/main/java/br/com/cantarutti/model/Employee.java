@@ -26,6 +26,13 @@ public class Employee {
     @JoinColumn(name="finance_info_id")
     private EmployeeFinanceInfo financeInfo;
 
+    // GeoLocation
+    @Column(nullable = true)
+    private Double lat;
+
+    @Column(nullable = true)
+    private Double lon;
+
     // Construtores
     public Employee() {}
 
@@ -35,7 +42,9 @@ public class Employee {
             String name,
             LocalDate dateContract,
             EmployeeAddress address,
-            EmployeeFinanceInfo financeInfo
+            EmployeeFinanceInfo financeInfo,
+            Double lat,
+            Double lon
     ) {
         this.id = id;
         this.registrationNumber = registrationNumber;
@@ -43,7 +52,8 @@ public class Employee {
         this.dateContract = dateContract;
         this.address = address;
         this.financeInfo = financeInfo;
-
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public UUID getId() {
@@ -92,6 +102,22 @@ public class Employee {
 
     public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
         this.financeInfo = financeInfo;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLon() {
+        return lon;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
     }
 }
 
