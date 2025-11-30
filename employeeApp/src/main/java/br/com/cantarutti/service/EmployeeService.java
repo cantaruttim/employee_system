@@ -22,6 +22,23 @@ public class EmployeeService {
     private final EmployeeAddressRepository addressRepo;
     private final EmployeeFinanceInfoRepository financeRepo;
 
+
+    public EmployeeDTO updatedLocation(UUID id, Double lat, Double lon) {
+        Employee employee = employeeRepo.findById(id)
+                .orElseThrow(
+                        () -> new RuntimeException("Employee not found!")
+                );
+
+        employee.setLat(lat);
+        employee.setLon(lon);
+
+        Employee updated = employeeRepo.save(employee);
+        return EmployeeMapper.toDTO(updated);
+    }
+
+
+    // HTTP - CONTROLLER
+
     // -------------------------------------------------------------
     // CREATE
     // -------------------------------------------------------------

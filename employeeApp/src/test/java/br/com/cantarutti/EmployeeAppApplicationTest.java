@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -83,5 +84,30 @@ public class EmployeeAppApplicationTest {
         System.out.println();
         System.out.printf("Last employee: " + result.get(1).getName());
     }
+
+    @Test
+    public void shouldUpdateLocation() {
+        UUID id = UUID.randomUUID();
+        Employee employee = new Employee();
+        employee.setId(id);
+        employee.setName("Alice");
+
+        // Mock do findById
+        when(repository.findById(id)).thenReturn(Optional.of(employee));
+
+        // Mock do save, retornando o próprio employee
+        when(repository.save(any(Employee.class))).thenAnswer(invocation -> invocation.getArgument(0));
+
+        EmployeeDTO result = service.updatedLocation(id, -23.55, -46.63);
+
+        // Verifica se os valores foram atualizados corretamente
+        assertEquals(-23.55, result.getLat(), 0.0001);
+        assertEquals(-46.63, result.getLon(), 0.0001);
+
+        // Verifica se o save foi chamado no repository
+        verify(repository).save(any(Employee.class));
+    }
+
+
 
 }

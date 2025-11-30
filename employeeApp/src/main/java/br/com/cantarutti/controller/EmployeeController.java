@@ -47,6 +47,17 @@ public class EmployeeController {
         return ResponseEntity.ok(updated);
     }
 
+    @PutMapping("/v1/update/{id}/employee/location")
+    public ResponseEntity<EmployeeDTO> updateLocation(
+            @PathVariable UUID id,
+            @RequestParam Double lat,
+            @RequestParam Double lon
+            ) {
+        EmployeeDTO updated = service.updatedLocation(id, lat, lon);
+        return ResponseEntity.ok(updated);
+    }
+
+
     @DeleteMapping("/v1/delete/{id}/employee")
     public ResponseEntity<Void> delete(
             @PathVariable UUID id
