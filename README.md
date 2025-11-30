@@ -1,7 +1,6 @@
 [DEVELOPING]
 
-The goal is to develop a web application that allows users to view their current location on a map and record their work hours through the system.
-
+An small aplication that we can see our location on map
 
 # System
 Build in two parts. Front and Backend.
