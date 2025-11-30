@@ -29,7 +29,14 @@ public class Employee {
     // Construtores
     public Employee() {}
 
-    public Employee(UUID id, String registrationNumber, String name, LocalDate dateContract, EmployeeAddress address, EmployeeFinanceInfo financeInfo) {
+    public Employee(
+            UUID id,
+            String registrationNumber,
+            String name,
+            LocalDate dateContract,
+            EmployeeAddress address,
+            EmployeeFinanceInfo financeInfo
+    ) {
         this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;

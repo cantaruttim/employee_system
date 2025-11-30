@@ -17,7 +17,8 @@ public class EmployeeFinanceInfo {
 
     public EmployeeFinanceInfo() {};
 
-    public EmployeeFinanceInfo (String roleName, Double baseSalary) {
+    public EmployeeFinanceInfo (UUID id, String roleName, Double baseSalary) {
+        this.id = id;
         this.roleName = roleName;
         this.baseSalary = baseSalary;
     }

@@ -18,6 +18,15 @@ public class EmployeeAddress {
     private String zipcode;
     private String city;
 
+    public EmployeeAddress(){};
+
+    public EmployeeAddress(UUID id, String address, String zipcode, String city) {
+        this.id = id;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.city = city;
+    }
+
     public UUID getId() {
         return id;
     }
