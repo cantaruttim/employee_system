@@ -1,12 +1,30 @@
 package br.com.cantarutti.model;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+
+import java.util.UUID;
+
+@Entity
+@Table(name = "tb_employee_address")
 public class EmployeeAddress {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
+    
     private String registrationNumber;
     private String address;
-    private String homeType;
+    private String zipcode;
+    private String city;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getRegistrationNumber() {
         return registrationNumber;
@@ -24,22 +42,19 @@ public class EmployeeAddress {
         this.address = address;
     }
 
-    public String getHomeType() {
-        return homeType;
+    public String getZipcode() {
+        return zipcode;
     }
 
-    public void setHomeType(String homeType) {
-        this.homeType = homeType;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof EmployeeAddress that)) return false;
-        return Objects.equals(getRegistrationNumber(), that.getRegistrationNumber()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getHomeType(), that.getHomeType());
+    public String getCity() {
+        return city;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRegistrationNumber(), getAddress(), getHomeType());
+    public void setCity(String city) {
+        this.city = city;
     }
 }

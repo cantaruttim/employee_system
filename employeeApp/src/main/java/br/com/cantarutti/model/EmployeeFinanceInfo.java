@@ -1,8 +1,16 @@
 package br.com.cantarutti.model;
 
-import java.util.Objects;
+import jakarta.persistence.*;
 
+import java.util.UUID;
+
+@Entity
+@Table(name = "tb_employee_finance_info")
 public class EmployeeFinanceInfo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
 
     private String registrationNumber;
     private String roleName;
@@ -14,6 +22,14 @@ public class EmployeeFinanceInfo {
         this.baseSalary = baseSalary;
     }
     public EmployeeFinanceInfo () {}
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getRegistrationNumber() {
         return registrationNumber;
@@ -41,16 +57,5 @@ public class EmployeeFinanceInfo {
 
     public Double getSalaryByPromotion(Double taxIncrease) {
         return this.baseSalary = (baseSalary + (baseSalary * taxIncrease));
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof EmployeeFinanceInfo that)) return false;
-        return Objects.equals(getRegistrationNumber(), that.getRegistrationNumber()) && Objects.equals(getRoleName(), that.getRoleName()) && Objects.equals(getBaseSalary(), that.getBaseSalary());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRegistrationNumber(), getRoleName(), getBaseSalary());
     }
 }

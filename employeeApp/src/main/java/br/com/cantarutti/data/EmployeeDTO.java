@@ -2,11 +2,10 @@ package br.com.cantarutti.data;
 
 import br.com.cantarutti.model.EmployeeAddress;
 import br.com.cantarutti.model.EmployeeFinanceInfo;
-import jakarta.persistence.Entity;
 
 import java.time.LocalDate;
 
-@Entity(name = "tb_employee")
+
 public class EmployeeDTO {
 
     private String registrationNumber;

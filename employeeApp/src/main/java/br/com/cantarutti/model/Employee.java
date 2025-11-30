@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tb_employee")
 public class Employee {
 
     @Id
@@ -92,15 +94,5 @@ public class Employee {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Employee employee)) return false;
-        return Objects.equals(getRegistrationNumber(), employee.getRegistrationNumber()) && Objects.equals(getName(), employee.getName()) && Objects.equals(getDateContract(), employee.getDateContract()) && Objects.equals(getAddress(), employee.getAddress()) && Objects.equals(getFinanceInfo(), employee.getFinanceInfo());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getRegistrationNumber(), getName(), getDateContract(), getAddress(), getFinanceInfo());
-    }
 }
 

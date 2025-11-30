@@ -1,20 +1,17 @@
 package br.com.cantarutti.data;
 
-import jakarta.persistence.Entity;
-
-@Entity(name="tb_address")
 public class EmployeeAdressDTO {
 
     private String registrationNumber;
     private String address;
-    private String homeType;
+    private String zipcode;
 
     public EmployeeAdressDTO(){}
 
-    public EmployeeAdressDTO(String registrationNumber, String address, String homeType) {
+    public EmployeeAdressDTO(String registrationNumber, String address, String zipcode) {
         this.registrationNumber = registrationNumber;
         this.address = address;
-        this.homeType = homeType;
+        this.zipcode = zipcode;
     }
 
     public String getRegistrationNumber() {
@@ -33,11 +30,11 @@ public class EmployeeAdressDTO {
         this.address = address;
     }
 
-    public String getHomeType() {
-        return homeType;
+    public String getZipCode() {
+        return zipcode;
     }
 
-    public void setHomeType(String homeType) {
-        this.homeType = homeType;
+    public void setZipCode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }
