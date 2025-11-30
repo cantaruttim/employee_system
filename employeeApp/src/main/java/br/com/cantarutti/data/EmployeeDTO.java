@@ -4,30 +4,42 @@ import br.com.cantarutti.model.EmployeeAddress;
 import br.com.cantarutti.model.EmployeeFinanceInfo;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 
 public class EmployeeDTO {
 
+    private UUID id;
     private String registrationNumber;
     private String name;
     private LocalDate dateContract;
     private EmployeeAddress address;
     private EmployeeFinanceInfo financeInfo;
 
-    public EmployeeDTO(){}
+    public EmployeeDTO() {};
 
     public EmployeeDTO(
+            UUID id,
             String registrationNumber,
             String name,
             LocalDate dateContract,
             EmployeeAddress address,
             EmployeeFinanceInfo financeInfo
     ) {
+        this.id = id;
         this.registrationNumber = registrationNumber;
         this.name = name;
         this.dateContract = dateContract;
         this.address = address;
         this.financeInfo = financeInfo;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getRegistrationNumber() {
