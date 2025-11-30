@@ -10,14 +10,12 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class EmployeeController {
-    // return all employee data from other classes
-
     private final EmployeeService service;
 
-    @PostMapping
+    @PostMapping("/v1/employees")
     public ResponseEntity<EmployeeDTO> create(
             @RequestBody EmployeeDTO dto
     ) {
@@ -26,13 +24,13 @@ public class EmployeeController {
         return ResponseEntity.status(201).body(saved);
     }
 
-    @GetMapping
+    @GetMapping("/v1/list_all/employees")
     public ResponseEntity<List<EmployeeDTO>> listAll() {
         List<EmployeeDTO> list = service.listAll();
         return ResponseEntity.ok(list);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/v1/list/{id}/employee")
     public ResponseEntity<EmployeeDTO> getById(
             @PathVariable UUID id
     ) {
@@ -40,15 +38,19 @@ public class EmployeeController {
         return ResponseEntity.ok(dto);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployeeDTO> update(@PathVariable UUID id,
-                                              @RequestBody EmployeeDTO dto) {
+    @PutMapping("/v1/update/{id}/employee")
+    public ResponseEntity<EmployeeDTO> update(
+            @PathVariable UUID id,
+            @RequestBody EmployeeDTO dto
+    ) {
         EmployeeDTO updated = service.update(id, dto);
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    @DeleteMapping("/v1/delete/{id}/employee")
+    public ResponseEntity<Void> delete(
+            @PathVariable UUID id
+    ) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
