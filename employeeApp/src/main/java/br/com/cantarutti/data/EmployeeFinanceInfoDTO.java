@@ -1,4 +1,4 @@
-package br.com.cantarutti.data.dto;
+package br.com.cantarutti.data;
 
 public class EmployeeFinanceInfoDTO {
 
