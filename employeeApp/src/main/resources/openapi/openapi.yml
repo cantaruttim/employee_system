@@ -1,13 +1,19 @@
 openapi: 3.0.3
 info:
   title: Employee System API
-  description: API para gerenciamento de funcionários, endereços e dados financeiros
+  description: API para gerenciamento de funcionários, endereços, dados financeiros e usuários
   version: 1.0.0
+
 servers:
   - url: http://localhost:8080
     description: Local development
 
 paths:
+
+  # ============================================
+  # =============== EMPLOYEES ===================
+  # ============================================
+
   /api/v1/employees:
     get:
       summary: Lista todos os funcionários
@@ -24,7 +30,7 @@ paths:
                   $ref: "#/components/schemas/EmployeeDTO"
 
     post:
-      summary: Cria um novo funcionário completo (dados, endereço e finanças)
+      summary: Cria um novo funcionário completo
       tags:
         - Employees
       requestBody:
@@ -53,7 +59,6 @@ paths:
             type: string
             format: uuid
           required: true
-          description: ID do funcionário
       responses:
         "200":
           description: Funcionário encontrado
@@ -75,7 +80,6 @@ paths:
             type: string
             format: uuid
           required: true
-          description: ID do funcionário
       requestBody:
         required: true
         content:
@@ -84,7 +88,7 @@ paths:
               $ref: "#/components/schemas/EmployeeDTO"
       responses:
         "200":
-          description: Funcionário atualizado com sucesso
+          description: Funcionário atualizado
           content:
             application/json:
               schema:
@@ -101,34 +105,136 @@ paths:
           name: id
           schema:
             type: string
+            required: true
             format: uuid
-          required: true
-          description: ID do funcionário
       responses:
         "204":
-          description: Funcionário removido com sucesso
+          description: Funcionário removido
         "404":
           description: Funcionário não encontrado
 
+
+  # ============================================
+  # ================= USERS =====================
+  # ============================================
+
+  /api/v1/users:
+    get:
+      summary: Lista todos os usuários
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Lista de usuários
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDTO"
+
+    post:
+      summary: Cria um novo usuário
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateDTO"
+      responses:
+        "201":
+          description: Usuário criado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+
+  /api/v1/users/{id}:
+    get:
+      summary: Retorna um usuário pelo ID
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+        "404":
+          description: Usuário não encontrado
+
+    put:
+      summary: Atualiza um usuário existente
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateDTO"
+      responses:
+        "200":
+          description: Usuário atualizado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+        "404":
+          description: Usuário não encontrado
+
+    delete:
+      summary: Remove um usuário
+      tags:
+        - Users
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Usuário removido
+        "404":
+          description: Usuário não encontrado
+
+
 components:
   schemas:
+
+    # ================== EMPLOYEE ==================
     EmployeeDTO:
       type: object
       properties:
         id:
           type: string
           format: uuid
-          readOnly: true
         registrationNumber:
           type: string
-          example: "EMP-00123"
         name:
           type: string
-          example: "Matheus Cantarutti"
         dateContract:
           type: string
           format: date
-          example: "2025-11-30"
         address:
           $ref: "#/components/schemas/EmployeeAddressDTO"
         financeInfo:
@@ -146,19 +252,14 @@ components:
         id:
           type: string
           format: uuid
-          readOnly: true
         registrationNumber:
           type: string
-          example: "EMP-00123"
         address:
           type: string
-          example: "Rua das Flores, 123"
         zipcode:
           type: string
-          example: "12345-678"
         city:
           type: string
-          example: "São Paulo"
       required:
         - registrationNumber
         - address
@@ -171,18 +272,51 @@ components:
         id:
           type: string
           format: uuid
-          readOnly: true
         registrationNumber:
           type: string
-          example: "EMP-00123"
         roleName:
           type: string
-          example: "Developer"
         baseSalary:
           type: number
           format: double
-          example: 4000.00
       required:
         - registrationNumber
         - roleName
         - baseSalary
+
+
+    # ================== USERS ====================
+    UserDTO:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        userName:
+          type: string
+        userEmail:
+          type: string
+        userPerfil:
+          type: string
+          enum: [ADMIN, USER]
+        userDateCreate:
+          type: string
+          format: date-time
+
+    UserCreateDTO:
+      type: object
+      properties:
+        userName:
+          type: string
+        userEmail:
+          type: string
+        userPassword:
+          type: string
+        userPerfil:
+          type: string
+          enum: [ADMIN, USER]
+      required:
+        - userName
+        - userEmail
+        - userPassword
+        - userPerfil
