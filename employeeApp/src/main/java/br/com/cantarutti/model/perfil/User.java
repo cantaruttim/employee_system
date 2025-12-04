@@ -24,11 +24,12 @@ public class User {
     private Perfil userPerfil;
     private LocalDate userDateCreate;
 
-    public User(UUID id, String userName, String userEmail, String userPassord) {
+    public User(UUID id, String userName, String userEmail, String userPassord, LocalDate userDateCreate) {
         this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassord = userPassord;
+        this.userDateCreate = userDateCreate;
 
         this.userPerfil = definirPerfilAutomaticamente();
     }
@@ -38,13 +39,14 @@ public class User {
     public String getUserEmail() { return userEmail; }
     public String getUserPassword() { return userPassord; }
     public Perfil getUserPerfil() { return userPerfil; }
+    public LocalDate getUserDateCreate() { return userDateCreate; }
 
     public void setUserId(UUID id) { this.id = id; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
     public void setUserPassword(String userPassord) { this.userPassord = userPassord; }
     public void setUserPerfil(Perfil userPerfil) { this.userPerfil = userPerfil; }
-
+    public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
 
     private Perfil definirPerfilAutomaticamente() {
         for (RegraPerfil regra : regras) {
