@@ -31,7 +31,7 @@ public class User {
         this.userPassord = userPassord;
         this.userDateCreate = userDateCreate;
 
-        this.userPerfil = definirPerfilAutomaticamente();
+        this.userPerfil = definePerfilAutomatic();
     }
 
     public UUID getUserId() { return id; }
@@ -48,7 +48,7 @@ public class User {
     public void setUserPerfil(Perfil userPerfil) { this.userPerfil = userPerfil; }
     public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
 
-    private Perfil definirPerfilAutomaticamente() {
+    private Perfil definePerfilAutomatic() {
         for (RegraPerfil regra : regras) {
             Perfil resultado = regra.verificar(this);
             if (resultado != null) {
