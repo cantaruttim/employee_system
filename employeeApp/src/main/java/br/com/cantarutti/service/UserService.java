@@ -62,7 +62,7 @@ public class UserService {
     }
 
     private UserDTO toDTO(User user) {
-        UserDTO dto = new UserDTO();
+        UserDTO dto = new UserDTO();        
         dto.setUserId(user.getUserId());
         dto.setUserName(user.getUserName());
         dto.setUserEmail(user.getUserEmail());
