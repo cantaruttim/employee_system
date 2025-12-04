@@ -1,7 +1,7 @@
 package br.com.cantarutti;
 
 import br.com.cantarutti.data.EmployeeDTO;
-import br.com.cantarutti.model.Employee;
+import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.repository.EmployeeRepository;
 import br.com.cantarutti.service.EmployeeService;
 import org.junit.Test;

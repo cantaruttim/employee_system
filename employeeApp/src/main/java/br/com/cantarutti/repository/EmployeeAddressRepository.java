@@ -1,7 +1,8 @@
 package br.com.cantarutti.repository;
 
-import br.com.cantarutti.model.EmployeeAddress;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.cantarutti.model.employee.EmployeeAddress;
 
 import java.util.UUID;
 

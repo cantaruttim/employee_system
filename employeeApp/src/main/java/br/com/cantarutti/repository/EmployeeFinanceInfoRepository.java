@@ -1,7 +1,8 @@
 package br.com.cantarutti.repository;
 
-import br.com.cantarutti.model.EmployeeFinanceInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
 
 import java.util.UUID;
 

@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class User {
 
-    private static final List<RegraPerfil> regras = List.of(
+    private static final List<PerfilRule> regras = List.of(
         user -> user.getUserEmail() != null && user.getUserEmail().endsWith("@empresa.com") 
                 ? Perfil.ADMIN 
                 : null,
@@ -49,8 +49,8 @@ public class User {
     public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
 
     private Perfil definePerfilAutomatic() {
-        for (RegraPerfil regra : regras) {
-            Perfil resultado = regra.verificar(this);
+        for (PerfilRule regra : regras) {
+            Perfil resultado = regra.verify(this);
             if (resultado != null) {
                 return resultado;
             }
@@ -58,7 +58,7 @@ public class User {
         return Perfil.USER; // padrão
     }
 
-    interface RegraPerfil {
-        Perfil verificar(User user);
+    interface PerfilRule {
+        Perfil verify(User user);
     }
 }

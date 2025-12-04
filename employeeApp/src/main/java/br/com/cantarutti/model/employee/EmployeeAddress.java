@@ -1,4 +1,4 @@
-package br.com.cantarutti.model;
+package br.com.cantarutti.model.employee;
 
 import br.com.cantarutti.repository.EmployeeAddressRepository;
 import jakarta.persistence.*;
