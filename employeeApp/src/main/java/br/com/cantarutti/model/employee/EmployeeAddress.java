@@ -1,10 +1,11 @@
 package br.com.cantarutti.model.employee;
 
-import br.com.cantarutti.repository.EmployeeAddressRepository;
 import jakarta.persistence.*;
 
 
 import java.util.UUID;
+
+import br.com.cantarutti.repository.employee.EmployeeAddressRepository;
 
 @Entity
 @Table(name = "tb_employee_address")

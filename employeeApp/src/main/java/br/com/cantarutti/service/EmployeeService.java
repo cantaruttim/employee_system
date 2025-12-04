@@ -1,13 +1,13 @@
 package br.com.cantarutti.service;
 
 import br.com.cantarutti.config.mapper.EmployeeMapper;
-import br.com.cantarutti.data.EmployeeDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
-import br.com.cantarutti.repository.EmployeeAddressRepository;
-import br.com.cantarutti.repository.EmployeeFinanceInfoRepository;
-import br.com.cantarutti.repository.EmployeeRepository;
+import br.com.cantarutti.repository.employee.EmployeeAddressRepository;
+import br.com.cantarutti.repository.employee.EmployeeFinanceInfoRepository;
+import br.com.cantarutti.repository.employee.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

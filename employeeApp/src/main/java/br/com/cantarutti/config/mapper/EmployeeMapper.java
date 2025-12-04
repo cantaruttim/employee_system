@@ -1,8 +1,8 @@
 package br.com.cantarutti.config.mapper;
 
-import br.com.cantarutti.data.EmployeeAddressDTO;
-import br.com.cantarutti.data.EmployeeDTO;
-import br.com.cantarutti.data.EmployeeFinanceInfoDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeAddressDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeFinanceInfoDTO;
 import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;

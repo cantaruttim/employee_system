@@ -1,13 +1,13 @@
-package br.com.cantarutti.model.perfil;
-
+package br.com.cantarutti.data.userDTO;
 import br.com.cantarutti.model.enums.Perfil;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-public class User {
+public class UserDTO {
 
-    private static final List<PerfilRule> regras = List.of(
+    private static final List<PerfilRule> rules = List.of(
         user -> user.getUserEmail() != null && user.getUserEmail().endsWith("@empresa.com") 
                 ? Perfil.ADMIN 
                 : null,
@@ -24,7 +24,7 @@ public class User {
     private Perfil userPerfil;
     private LocalDate userDateCreate;
 
-    public User(UUID id, String userName, String userEmail, String userPassord, LocalDate userDateCreate) {
+    public UserDTO(UUID id, String userName, String userEmail, String userPassord, LocalDate userDateCreate) {
         this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
@@ -49,16 +49,18 @@ public class User {
     public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
 
     private Perfil definePerfilAutomatic() {
-        for (PerfilRule regra : regras) {
-            Perfil resultado = regra.verify(this);
-            if (resultado != null) {
-                return resultado;
+        for (PerfilRule rule : rules) {
+            Perfil result = rule.verify(this);
+            if (result != null) {
+                return result;
             }
         }
         return Perfil.USER; // padrão
     }
 
     interface PerfilRule {
-        Perfil verify(User user);
+        Perfil verify(UserDTO user);
     }
+
 }
+    

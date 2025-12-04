@@ -1,6 +1,6 @@
 package br.com.cantarutti.controller;
 
-import br.com.cantarutti.data.EmployeeDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
