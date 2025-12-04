@@ -20,15 +20,15 @@ public class User {
     private UUID id;
     private String userName;
     private String userEmail;
-    private String userPassord;
+    private String userPassword;
     private Perfil userPerfil;
     private LocalDate userDateCreate;
 
-    public User(UUID id, String userName, String userEmail, String userPassord, LocalDate userDateCreate) {
+    public User(UUID id, String userName, String userEmail, String userPassword, LocalDate userDateCreate) {
         this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
-        this.userPassord = userPassord;
+        this.userPassword = userPassword;
         this.userDateCreate = userDateCreate;
 
         this.userPerfil = definePerfilAutomatic();
@@ -37,14 +37,14 @@ public class User {
     public UUID getUserId() { return id; }
     public String getUserName() { return userName; }
     public String getUserEmail() { return userEmail; }
-    public String getUserPassword() { return userPassord; }
+    public String getUserPassword() { return userPassword; }
     public Perfil getUserPerfil() { return userPerfil; }
     public LocalDate getUserDateCreate() { return userDateCreate; }
 
     public void setUserId(UUID id) { this.id = id; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-    public void setUserPassword(String userPassord) { this.userPassord = userPassord; }
+    public void setUserPassword(String userPassword) { this.userPassword = userPassword; }
     public void setUserPerfil(Perfil userPerfil) { this.userPerfil = userPerfil; }
     public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
 
