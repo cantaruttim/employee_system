@@ -17,6 +17,9 @@ public class UserService {
 
     public UserDTO save(UserDTO dto) {
         User user = toEntity(dto);
+
+        // get the pass and crypto it
+
         User saved = repository.save(user);
         return toDTO(saved);
     }
