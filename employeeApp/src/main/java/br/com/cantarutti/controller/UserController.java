@@ -16,6 +16,10 @@ public class UserController {
 
     private final UserService service;
 
+    @GetMapping String getMessage() {
+        return "Hello to my private API Controller";
+    }
+
     @PostMapping("/v1/users")
     public ResponseEntity<UserDTO> create(
             @RequestBody UserDTO dto

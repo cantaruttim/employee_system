@@ -34,19 +34,53 @@ public class User {
         this.userPerfil = definePerfilAutomatic();
     }
 
-    public UUID getUserId() { return id; }
-    public String getUserName() { return userName; }
-    public String getUserEmail() { return userEmail; }
-    public String getUserPassword() { return userPassword; }
-    public Perfil getUserPerfil() { return userPerfil; }
-    public LocalDate getUserDateCreate() { return userDateCreate; }
+    public UUID getId() {
+        return id;
+    }
 
-    public void setUserId(UUID id) { this.id = id; }
-    public void setUserName(String userName) { this.userName = userName; }
-    public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
-    public void setUserPassword(String userPassword) { this.userPassword = userPassword; }
-    public void setUserPerfil(Perfil userPerfil) { this.userPerfil = userPerfil; }
-    public void setUserDateCreate(LocalDate userDateCreate) { this.userDateCreate = userDateCreate; }
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public Perfil getUserPerfil() {
+        return userPerfil;
+    }
+
+    public void setUserPerfil(Perfil userPerfil) {
+        this.userPerfil = userPerfil;
+    }
+
+    public LocalDate getUserDateCreate() {
+        return userDateCreate;
+    }
+
+    public void setUserDateCreate(LocalDate userDateCreate) {
+        this.userDateCreate = userDateCreate;
+    }
 
     private Perfil definePerfilAutomatic() {
         for (PerfilRule rule : rules) {
