@@ -17,15 +17,17 @@ public class UserDTO {
                 : null
     );
 
-    private UUID id;
+    private UUID userId;
     private String userName;
     private String userEmail;
     private String userPassword;
     private Perfil userPerfil;
     private LocalDate userDateCreate;
 
-    public UserDTO(UUID id, String userName, String userEmail, String userPassword, String userPerfil, LocalDate userDateCreate) {
-        this.id = id;
+    public UserDTO() {}
+
+    public UserDTO(UUID userId, String userName, String userEmail, String userPassword, String userPerfil, LocalDate userDateCreate) {
+        this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
@@ -35,14 +37,14 @@ public class UserDTO {
     }
 
 
-    public UUID getUserId() { return id; }
+    public UUID getUserId() { return userId; }
     public String getUserName() { return userName; }
     public String getUserEmail() { return userEmail; }
     public String getUserPassword() { return userPassword; }
     public Perfil getUserPerfil() { return userPerfil; }
     public LocalDate getUserDateCreate() { return userDateCreate; }
 
-    public void setUserId(UUID id) { this.id = id; }
+    public void setUserId(UUID userId) { this.userId = userId; }
     public void setUserName(String userName) { this.userName = userName; }
     public void setUserEmail(String userEmail) { this.userEmail = userEmail; }
     public void setUserPassword(String userPassword) { this.userPassword = userPassword; }

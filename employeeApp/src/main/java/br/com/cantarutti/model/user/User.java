@@ -1,10 +1,14 @@
 package br.com.cantarutti.model.user;
 
 import br.com.cantarutti.model.enums.Perfil;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
+@Table(name = "tb_user")
 public class User {
 
     private static final List<PerfilRule> rules = List.of(
@@ -17,15 +21,18 @@ public class User {
                 : null
     );
 
-    private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID userId;
+
     private String userName;
     private String userEmail;
     private String userPassword;
     private Perfil userPerfil;
     private LocalDate userDateCreate;
 
-    public User(UUID id, String userName, String userEmail, String userPassword, LocalDate userDateCreate) {
-        this.id = id;
+    public User(UUID userId, String userName, String userEmail, String userPassword, LocalDate userDateCreate) {
+        this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
@@ -34,12 +41,12 @@ public class User {
         this.userPerfil = definePerfilAutomatic();
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getUserId() {
+        return userId;
     }
 
     public void setId(UUID id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public String getUserName() {
