@@ -5,4 +5,11 @@ import br.com.cantarutti.model.employee.Employee;
 public class RHDepartment extends Employee {
     // represent the Employee that worked on RH Department
     // think of a better class name
+
+    private String departmentLocated = HUMAN_RESOURCES
+
+    public String getDepartmentLocated() {
+        return departmentLocated;
+    }
+    
 }
