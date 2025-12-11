@@ -18,6 +18,8 @@ public class Employee {
     private String name;
     private LocalDate dateContract;
 
+    private String departmentLocated;
+
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="address_id")
     private EmployeeAddress address;
@@ -26,7 +28,7 @@ public class Employee {
     @JoinColumn(name="finance_info_id")
     private EmployeeFinanceInfo financeInfo;
 
-    // GeoLocation
+    // GeoLocation -- must be a better service implementation
     @Column(nullable = true)
     private Double lat;
 
