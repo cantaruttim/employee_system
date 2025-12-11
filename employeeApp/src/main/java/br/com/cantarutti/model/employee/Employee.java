@@ -20,8 +20,6 @@ public class Employee {
 
     private String departmentLocated;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="status_id")
     private EmployeeStatus statusEmployee;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
