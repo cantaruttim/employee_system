@@ -20,6 +20,8 @@ public class Employee {
 
     private String departmentLocated;
 
+    private String levelPosition;
+
     private EmployeeStatus statusEmployee;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -70,6 +72,10 @@ public class Employee {
 
     public String getRegistrationNumber() {
         return registrationNumber;
+    }
+
+    public String getLevelPosition() {
+        return levelPosition;
     }
 
     public void setRegistrationNumber(String registrationNumber) {
