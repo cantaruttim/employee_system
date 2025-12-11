@@ -19,7 +19,10 @@ public class Employee {
     private LocalDate dateContract;
 
     private String departmentLocated;
-    private String statusEmployee;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="status_id")
+    private EmployeeStatus statusEmployee;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="address_id")
@@ -107,7 +110,7 @@ public class Employee {
         return statusEmployee;
     }
 
-    public void setStatusEmployee(String statusEmployee) {
+    public void setStatusEmployee(EmployeeStatus statusEmployee) {
         this.statusEmployee = statusEmployee;
     }
 
