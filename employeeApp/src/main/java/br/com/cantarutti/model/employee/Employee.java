@@ -19,6 +19,7 @@ public class Employee {
     private LocalDate dateContract;
 
     private String departmentLocated;
+    private String statusEmployee;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="address_id")
@@ -94,6 +95,22 @@ public class Employee {
         return address;
     }
 
+    public String getDepartmentLocated() {
+        return departmentLocated;
+    }
+
+    public void setDepartmentLocated(String departmentLocated) {
+        this.departmentLocated = departmentLocated;
+    }
+
+    public String getStatusEmployee() {
+        return statusEmployee;
+    }
+
+    public void setStatusEmployee(String statusEmployee) {
+        this.statusEmployee = statusEmployee;
+    }
+
     public void setAddress(EmployeeAddress address) {
         this.address = address;
     }
@@ -121,5 +138,7 @@ public class Employee {
     public void setLon(Double lon) {
         this.lon = lon;
     }
+
+
 }
 
