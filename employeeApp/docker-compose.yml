@@ -6,27 +6,33 @@ services:
     image: employee_app
     container_name: employee_app_container
     ports:
-      - "8080:8080"   # Porta do host : Porta do container
+      - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/employee_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: pass123
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATA_MONGODB_URI: mongodb://root:root123@mongodb:27017/employee_db?authSource=admin
     depends_on:
-      - db
+      - mongodb
 
-  db:
-    image: mysql:8.0
-    container_name: mysql_employee
+  mongodb:
+    image: mongo:6
+    container_name: mongodb_employee
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: employee_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root123
+      MONGO_INITDB_DATABASE: employee_db
     ports:
-      - "3306:3306"
+      - "27017:27017"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express:1
+    container_name: mongo_express_employee
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root123
 
 volumes:
-  mysql_data:
+  mongodb_data:

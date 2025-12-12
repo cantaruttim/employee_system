@@ -1,50 +1,44 @@
 package br.com.cantarutti.model.employee;
 
 import br.com.cantarutti.model.enums.EmployeeStatus;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-@Table(name = "tb_employee")
+@Document(collection = "tb_employee")
 public class Employee {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;  // MongoDB usa String (ObjectId como padrão)
 
     private String registrationNumber;
     private String name;
     private LocalDate dateContract;
 
     private String departmentLocated;
-
     private String levelPosition;
 
     private EmployeeStatus statusEmployee;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="address_id")
+    // Agora documentos internos embutidos (MongoDB não suporta @OneToOne)
     private EmployeeAddress address;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="finance_info_id")
     private EmployeeFinanceInfo financeInfo;
 
-    // GeoLocation -- must be a better service implementation
-    @Column(nullable = true)
+    // GeoLocation
+    @Field("lat")
     private Double lat;
 
-    @Column(nullable = true)
+    @Field("lon")
     private Double lon;
 
-    // Construtores
     public Employee() {}
 
     public Employee(
-            UUID id,
+            String id,
             String registrationNumber,
             String name,
             LocalDate dateContract,
@@ -63,11 +57,13 @@ public class Employee {
         this.lon = lon;
     }
 
-    public UUID getId() {
+    // Getters e Setters
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -143,10 +139,4 @@ public class Employee {
         return lon;
     }
 
-    public void setLon(Double lon) {
-        this.lon = lon;
-    }
-
-
 }
-

@@ -5,8 +5,6 @@ import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
-import br.com.cantarutti.repository.employee.EmployeeAddressRepository;
-import br.com.cantarutti.repository.employee.EmployeeFinanceInfoRepository;
 import br.com.cantarutti.repository.employee.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

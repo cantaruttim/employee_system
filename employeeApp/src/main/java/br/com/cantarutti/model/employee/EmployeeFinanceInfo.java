@@ -1,34 +1,15 @@
 package br.com.cantarutti.model.employee;
 
-import jakarta.persistence.*;
-
-import java.util.UUID;
-
-@Entity
-@Table(name = "tb_employee_finance_info")
 public class EmployeeFinanceInfo {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id ;
 
     private String roleName;
     private Double baseSalary;
 
-    public EmployeeFinanceInfo() {};
+    public EmployeeFinanceInfo() {}
 
-    public EmployeeFinanceInfo (UUID id, String roleName, Double baseSalary) {
-        this.id = id;
+    public EmployeeFinanceInfo(String roleName, Double baseSalary) {
         this.roleName = roleName;
         this.baseSalary = baseSalary;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getRoleName() {

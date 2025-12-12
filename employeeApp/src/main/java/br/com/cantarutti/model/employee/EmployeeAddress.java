@@ -1,39 +1,17 @@
 package br.com.cantarutti.model.employee;
 
-import jakarta.persistence.*;
-
-
-import java.util.UUID;
-
-import br.com.cantarutti.repository.employee.EmployeeAddressRepository;
-
-@Entity
-@Table(name = "tb_employee_address")
 public class EmployeeAddress {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id ;
 
     private String address;
     private String zipcode;
     private String city;
 
-    public EmployeeAddress(){};
+    public EmployeeAddress() {}
 
-    public EmployeeAddress(UUID id, String address, String zipcode, String city) {
-        this.id = id;
+    public EmployeeAddress(String address, String zipcode, String city) {
         this.address = address;
         this.zipcode = zipcode;
         this.city = city;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getAddress() {
@@ -44,11 +22,11 @@ public class EmployeeAddress {
         this.address = address;
     }
 
-    public String getZipCode() {
+    public String getZipcode() {
         return zipcode;
     }
 
-    public void setZipCode(String zipcode) {
+    public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
 
@@ -60,3 +38,4 @@ public class EmployeeAddress {
         this.city = city;
     }
 }
+
