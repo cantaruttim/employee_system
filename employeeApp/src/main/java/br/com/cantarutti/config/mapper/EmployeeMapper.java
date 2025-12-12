@@ -20,7 +20,7 @@ public class EmployeeMapper {
 
         employee.setId(dto.getId());
         employee.setRegistrationNumber(dto.getRegistrationNumber());
-        employee.setName(dto.getEmployeeName());
+        employee.setEmployeeName(dto.getEmployeeName());
         employee.setDateContract(dto.getDateContract());
         employee.setLat(dto.getLat());
         employee.setLon(dto.getLon());

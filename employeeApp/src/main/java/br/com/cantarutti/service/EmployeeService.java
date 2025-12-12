@@ -6,6 +6,7 @@ import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
 import br.com.cantarutti.repository.employee.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,8 @@ import java.util.List;
 @Service
 public class EmployeeService {
 
-    private final EmployeeRepository employeeRepo;
+    @Autowired
+    private EmployeeRepository employeeRepo;
 
     public EmployeeService(EmployeeRepository employeeRepo) {
         this.employeeRepo = employeeRepo;
@@ -77,7 +79,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
         // Dados básicos
-        employee.setName(dto.getEmployeeName());
+        employee.setEmployeeName(dto.getEmployeeName());
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setDateContract(dto.getDateContract());
         employee.setDepartmentLocated(dto.getDepartmentLocated());
@@ -122,7 +124,7 @@ public class EmployeeService {
         employee.setId(null); // Mongo cria ID
 
         employee.setRegistrationNumber(dto.getRegistrationNumber());
-        employee.setName(dto.getEmployeeName());
+        employee.setEmployeeName(dto.getEmployeeName());
         employee.setDateContract(dto.getDateContract());
 
         // Address

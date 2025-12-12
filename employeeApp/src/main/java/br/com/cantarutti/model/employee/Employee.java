@@ -1,21 +1,20 @@
 package br.com.cantarutti.model.employee;
 
-import br.com.cantarutti.model.enums.EmployeeStatus;
+import  br.com.cantarutti.model.enums.EmployeeStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
-import java.util.Objects;
-import java.util.UUID;
 
 @Document(collection = "tb_employee")
 public class Employee {
 
+    @Id
     private String id;  // MongoDB usa String (ObjectId como padrão)
 
     private String registrationNumber;
-    private String name;
+    private String employeeName;
     private LocalDate dateContract;
 
     private String departmentLocated;
@@ -52,11 +51,11 @@ public class Employee {
     }
 
     public String getName() {
-        return name;
+        return employeeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public LocalDate getDateContract() {

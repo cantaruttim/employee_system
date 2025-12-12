@@ -2,6 +2,7 @@ package br.com.cantarutti.controller;
 
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
-    private final EmployeeService service;
+
+    @Autowired
+    private EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
