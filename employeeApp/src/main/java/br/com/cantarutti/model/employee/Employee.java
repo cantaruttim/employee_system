@@ -1,5 +1,6 @@
 package br.com.cantarutti.model.employee;
 
+import br.com.cantarutti.model.enums.EmployeeStatus;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -110,7 +111,7 @@ public class Employee {
         this.departmentLocated = departmentLocated;
     }
 
-    public String getStatusEmployee() {
+    public EmployeeStatus getStatusEmployee() {
         return statusEmployee;
     }
 
