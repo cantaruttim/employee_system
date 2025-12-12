@@ -2,14 +2,12 @@ package br.com.cantarutti.model.department;
 
 import br.com.cantarutti.model.employee.Employee;
 
-public class RHDepartment extends Employee {
+public class EmployeeHumanResources extends Employee {
     // represent the Employee that worked on RH Department
     // think of a better class name
 
-    private String departmentLocated = HUMAN_RESOURCES
-
     public String getDepartmentLocated() {
-        return departmentLocated;
+        return "HUMAN_RESOURCES";
     }
     
 }
