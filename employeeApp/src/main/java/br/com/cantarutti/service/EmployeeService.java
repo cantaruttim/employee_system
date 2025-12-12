@@ -77,7 +77,7 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
         // Dados básicos
-        employee.setName(dto.getName());
+        employee.setName(dto.getEmployeeName());
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setDateContract(dto.getDateContract());
         employee.setDepartmentLocated(dto.getDepartmentLocated());
@@ -89,7 +89,7 @@ public class EmployeeService {
         var addressDTO = dto.getAddress();
         address.setAddress(addressDTO.getAddress());
         address.setCity(addressDTO.getCity());
-        address.setZipcode(addressDTO.getZipCode());
+        address.setZipCode(addressDTO.getZipCode());
 
         // Finance
         EmployeeFinanceInfo finance = employee.getFinanceInfo();
@@ -122,7 +122,7 @@ public class EmployeeService {
         employee.setId(null); // Mongo cria ID
 
         employee.setRegistrationNumber(dto.getRegistrationNumber());
-        employee.setName(dto.getName());
+        employee.setName(dto.getEmployeeName());
         employee.setDateContract(dto.getDateContract());
 
         // Address

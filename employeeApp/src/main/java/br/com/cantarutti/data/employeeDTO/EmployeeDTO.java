@@ -1,34 +1,27 @@
 package br.com.cantarutti.data.employeeDTO;
-
-
-import br.com.cantarutti.model.employee.EmployeeAddress;
-import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
 import br.com.cantarutti.model.enums.EmployeeStatus;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.LocalDate;
 
 public class EmployeeDTO {
 
-    private String id;  // MongoDB usa String (ObjectId como padrão)
-
+    private String id;
     private String registrationNumber;
-    private String name;
+    private String employeeName;
     private LocalDate dateContract;
 
     private String departmentLocated;
     private String levelPosition;
 
     private EmployeeStatus statusEmployee;
-
-    private EmployeeAddress address;
-
-    private EmployeeFinanceInfo financeInfo;
+    private EmployeeAddressDTO address;
+    private EmployeeFinanceInfoDTO financeInfo;
 
     // GeoLocation
     private Double lat;
-
     private Double lon;
+
+    public void EmployeeFinanceInfoDTO() {}
 
     public String getId() {
         return id;
@@ -46,12 +39,12 @@ public class EmployeeDTO {
         this.registrationNumber = registrationNumber;
     }
 
-    public String getName() {
-        return name;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
     }
 
     public LocalDate getDateContract() {
@@ -86,19 +79,19 @@ public class EmployeeDTO {
         this.statusEmployee = statusEmployee;
     }
 
-    public EmployeeAddress getAddress() {
+    public EmployeeAddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(EmployeeAddress address) {
+    public void setAddress(EmployeeAddressDTO address) {
         this.address = address;
     }
 
-    public EmployeeFinanceInfo getFinanceInfo() {
+    public EmployeeFinanceInfoDTO getFinanceInfo() {
         return financeInfo;
     }
 
-    public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
+    public void setFinanceInfo(EmployeeFinanceInfoDTO financeInfo) {
         this.financeInfo = financeInfo;
     }
 
