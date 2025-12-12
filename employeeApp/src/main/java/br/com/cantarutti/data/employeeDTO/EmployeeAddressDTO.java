@@ -3,17 +3,8 @@ package br.com.cantarutti.data.employeeDTO;
 public class EmployeeAddressDTO {
 
     private String address;
-    private String zipcode;
+    private String zipCode;
     private String city;
-
-    public EmployeeAddressDTO(){}
-
-    public EmployeeAddressDTO(String address, String zipcode, String city) {
-        this.address = address;
-        this.zipcode = zipcode;
-        this.city = city;
-
-    }
 
     public String getAddress() {
         return address;
@@ -24,11 +15,11 @@ public class EmployeeAddressDTO {
     }
 
     public String getZipCode() {
-        return zipcode;
+        return zipCode;
     }
 
-    public void setZipCode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {

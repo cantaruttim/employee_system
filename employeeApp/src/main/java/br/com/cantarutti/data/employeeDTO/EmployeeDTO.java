@@ -1,50 +1,40 @@
 package br.com.cantarutti.data.employeeDTO;
 
 
-import java.time.LocalDate;
-import java.util.UUID;
+import br.com.cantarutti.model.employee.EmployeeAddress;
+import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
+import br.com.cantarutti.model.enums.EmployeeStatus;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.LocalDate;
 
 public class EmployeeDTO {
 
-    private UUID id;
+    private String id;  // MongoDB usa String (ObjectId como padrão)
+
     private String registrationNumber;
     private String name;
     private LocalDate dateContract;
-    private EmployeeAddressDTO address;
-    private EmployeeFinanceInfoDTO financeInfo;
+
+    private String departmentLocated;
+    private String levelPosition;
+
+    private EmployeeStatus statusEmployee;
+
+    private EmployeeAddress address;
+
+    private EmployeeFinanceInfo financeInfo;
+
+    // GeoLocation
     private Double lat;
+
     private Double lon;
 
-
-    public EmployeeDTO() {};
-
-
-    public EmployeeDTO(
-            UUID id,
-            String registrationNumber,
-            String name,
-            LocalDate dateContract,
-            EmployeeAddressDTO address,
-            EmployeeFinanceInfoDTO financeInfo,
-            Double lat,
-            Double lon
-    ) {
-        this.id = id;
-        this.registrationNumber = registrationNumber;
-        this.name = name;
-        this.dateContract = dateContract;
-        this.address = address;
-        this.financeInfo = financeInfo;
-        this.lat = lat;
-        this.lon = lon;
-    }
-
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -72,19 +62,43 @@ public class EmployeeDTO {
         this.dateContract = dateContract;
     }
 
-    public EmployeeAddressDTO getAddress() {
+    public String getDepartmentLocated() {
+        return departmentLocated;
+    }
+
+    public void setDepartmentLocated(String departmentLocated) {
+        this.departmentLocated = departmentLocated;
+    }
+
+    public String getLevelPosition() {
+        return levelPosition;
+    }
+
+    public void setLevelPosition(String levelPosition) {
+        this.levelPosition = levelPosition;
+    }
+
+    public EmployeeStatus getStatusEmployee() {
+        return statusEmployee;
+    }
+
+    public void setStatusEmployee(EmployeeStatus statusEmployee) {
+        this.statusEmployee = statusEmployee;
+    }
+
+    public EmployeeAddress getAddress() {
         return address;
     }
 
-    public void setAddress(EmployeeAddressDTO address) {
+    public void setAddress(EmployeeAddress address) {
         this.address = address;
     }
 
-    public EmployeeFinanceInfoDTO getFinanceInfo() {
+    public EmployeeFinanceInfo getFinanceInfo() {
         return financeInfo;
     }
 
-    public void setFinanceInfo(EmployeeFinanceInfoDTO financeInfo) {
+    public void setFinanceInfo(EmployeeFinanceInfo financeInfo) {
         this.financeInfo = financeInfo;
     }
 

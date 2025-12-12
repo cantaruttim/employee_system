@@ -5,13 +5,6 @@ public class EmployeeFinanceInfoDTO {
     private String roleName;
     private Double baseSalary;
 
-    public EmployeeFinanceInfoDTO() {};
-
-    public EmployeeFinanceInfoDTO(String roleName, Double baseSalary) {
-        this.roleName = roleName;
-        this.baseSalary = baseSalary;
-    }
-
     public String getRoleName() {
         return roleName;
     }

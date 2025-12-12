@@ -35,30 +35,6 @@ public class Employee {
     @Field("lon")
     private Double lon;
 
-    public Employee() {}
-
-    public Employee(
-            String id,
-            String registrationNumber,
-            String name,
-            LocalDate dateContract,
-            EmployeeAddress address,
-            EmployeeFinanceInfo financeInfo,
-            Double lat,
-            Double lon
-    ) {
-        this.id = id;
-        this.registrationNumber = registrationNumber;
-        this.name = name;
-        this.dateContract = dateContract;
-        this.address = address;
-        this.financeInfo = financeInfo;
-        this.lat = lat;
-        this.lon = lon;
-    }
-
-    // Getters e Setters
-
     public String getId() {
         return id;
     }
@@ -69,10 +45,6 @@ public class Employee {
 
     public String getRegistrationNumber() {
         return registrationNumber;
-    }
-
-    public String getLevelPosition() {
-        return levelPosition;
     }
 
     public void setRegistrationNumber(String registrationNumber) {
@@ -95,10 +67,6 @@ public class Employee {
         this.dateContract = dateContract;
     }
 
-    public EmployeeAddress getAddress() {
-        return address;
-    }
-
     public String getDepartmentLocated() {
         return departmentLocated;
     }
@@ -107,12 +75,24 @@ public class Employee {
         this.departmentLocated = departmentLocated;
     }
 
+    public String getLevelPosition() {
+        return levelPosition;
+    }
+
+    public void setLevelPosition(String levelPosition) {
+        this.levelPosition = levelPosition;
+    }
+
     public EmployeeStatus getStatusEmployee() {
         return statusEmployee;
     }
 
     public void setStatusEmployee(EmployeeStatus statusEmployee) {
         this.statusEmployee = statusEmployee;
+    }
+
+    public EmployeeAddress getAddress() {
+        return address;
     }
 
     public void setAddress(EmployeeAddress address) {
@@ -139,4 +119,7 @@ public class Employee {
         return lon;
     }
 
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
 }

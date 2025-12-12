@@ -2,7 +2,6 @@ package br.com.cantarutti.controller;
 
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.service.EmployeeService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +10,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 public class EmployeeController {
     private final EmployeeService service;
+
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
+    }
 
     @PostMapping("/v1/employees")
     public ResponseEntity<EmployeeDTO> create(
@@ -32,37 +34,37 @@ public class EmployeeController {
 
     @GetMapping("/v1/list/{id}/employee")
     public ResponseEntity<EmployeeDTO> getById(
-            @PathVariable UUID id
+            @PathVariable String id
     ) {
-        EmployeeDTO dto = service.findById(id);
+        EmployeeDTO dto = service.findById(String.valueOf(UUID.fromString(id)));
         return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/v1/update/{id}/employee")
     public ResponseEntity<EmployeeDTO> update(
-            @PathVariable UUID id,
+            @PathVariable String id,
             @RequestBody EmployeeDTO dto
     ) {
-        EmployeeDTO updated = service.update(id, dto);
+        EmployeeDTO updated = service.update(String.valueOf(UUID.fromString(id)), dto);
         return ResponseEntity.ok(updated);
     }
 
     @PutMapping("/v1/update/{id}/employee/location")
     public ResponseEntity<EmployeeDTO> updateLocation(
-            @PathVariable UUID id,
+            @PathVariable String id,
             @RequestParam Double lat,
             @RequestParam Double lon
             ) {
-        EmployeeDTO updated = service.updatedLocation(id, lat, lon);
+        EmployeeDTO updated = service.updatedLocation(String.valueOf(UUID.fromString(id)), lat, lon);
         return ResponseEntity.ok(updated);
     }
 
 
     @DeleteMapping("/v1/delete/{id}/employee")
     public ResponseEntity<Void> delete(
-            @PathVariable UUID id
+            @PathVariable String id
     ) {
-        service.delete(id);
+        service.delete(String.valueOf(UUID.fromString(id)));
         return ResponseEntity.noContent().build();
     }
 

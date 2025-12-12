@@ -6,26 +6,26 @@ import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
 import br.com.cantarutti.repository.employee.EmployeeRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepo;
-    private final EmployeeAddressRepository addressRepo;
-    private final EmployeeFinanceInfoRepository financeRepo;
 
+    public EmployeeService(EmployeeRepository employeeRepo) {
+        this.employeeRepo = employeeRepo;
+    }
 
-    public EmployeeDTO updatedLocation(UUID id, Double lat, Double lon) {
+    // -------------------------------------------------------------
+    // UPDATE ONLY LOCATION
+    // -------------------------------------------------------------
+    public EmployeeDTO updatedLocation(String id, Double lat, Double lon) {
+
         Employee employee = employeeRepo.findById(id)
-                .orElseThrow(
-                        () -> new RuntimeException("Employee not found!")
-                );
+                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
         employee.setLat(lat);
         employee.setLon(lon);
@@ -35,14 +35,14 @@ public class EmployeeService {
     }
 
 
-    // HTTP - CONTROLLER
-
     // -------------------------------------------------------------
     // CREATE
     // -------------------------------------------------------------
     public EmployeeDTO save(EmployeeDTO dto) {
         Employee employee = EmployeeMapper.toEntity(dto);
-        employee.setId(null);
+
+        employee.setId(null); // Mongo irá criar ObjectId automaticamente
+
         Employee saved = employeeRepo.save(employee);
         return EmployeeMapper.toDTO(saved);
     }
@@ -51,8 +51,7 @@ public class EmployeeService {
     // LIST ALL
     // -------------------------------------------------------------
     public List<EmployeeDTO> listAll() {
-        return employeeRepo
-                .findAll()
+        return employeeRepo.findAll()
                 .stream()
                 .map(EmployeeMapper::toDTO)
                 .toList();
@@ -61,7 +60,8 @@ public class EmployeeService {
     // -------------------------------------------------------------
     // FIND BY ID
     // -------------------------------------------------------------
-    public EmployeeDTO findById(UUID id) {
+    public EmployeeDTO findById(String id) {
+
         Employee employee = employeeRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
@@ -71,73 +71,76 @@ public class EmployeeService {
     // -------------------------------------------------------------
     // UPDATE
     // -------------------------------------------------------------
-    public EmployeeDTO update(UUID id, EmployeeDTO dto) {
+    public EmployeeDTO update(String id, EmployeeDTO dto) {
 
         Employee employee = employeeRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
+        // Dados básicos
         employee.setName(dto.getName());
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setDateContract(dto.getDateContract());
+        employee.setDepartmentLocated(dto.getDepartmentLocated());
+        employee.setLevelPosition(dto.getLevelPosition());
+        employee.setStatusEmployee(dto.getStatusEmployee());
 
-        var address = employee.getAddress();
+        // Address
+        EmployeeAddress address = employee.getAddress();
         var addressDTO = dto.getAddress();
         address.setAddress(addressDTO.getAddress());
         address.setCity(addressDTO.getCity());
-        address.setZipCode(addressDTO.getZipCode());
+        address.setZipcode(addressDTO.getZipCode());
 
-        var finance = employee.getFinanceInfo();
+        // Finance
+        EmployeeFinanceInfo finance = employee.getFinanceInfo();
         var financeDTO = dto.getFinanceInfo();
         finance.setBaseSalary(financeDTO.getBaseSalary());
         finance.setRoleName(financeDTO.getRoleName());
 
-        addressRepo.save(address);
-        financeRepo.save(finance);
         employeeRepo.save(employee);
 
         return EmployeeMapper.toDTO(employee);
     }
 
     // -------------------------------------------------------------
-    // DELETE
+    // DELETE (agora só remove o documento principal)
     // -------------------------------------------------------------
-    public void delete(UUID id) {
+    public void delete(String id) {
 
         Employee employee = employeeRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
 
-        // Remove dependências primeiro
-        addressRepo.delete((EmployeeAddress) employee.getAddress());
-        financeRepo.delete((EmployeeFinanceInfo) employee.getFinanceInfo());
-
-        // Depois remove o employee
         employeeRepo.delete(employee);
     }
 
-
+    // -------------------------------------------------------------
+    // CREATE MANUAL
+    // -------------------------------------------------------------
     public Employee createEmployee(EmployeeDTO dto) {
 
         Employee employee = new Employee();
-        employee.setId(dto.getId());
+        employee.setId(null); // Mongo cria ID
+
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setName(dto.getName());
         employee.setDateContract(dto.getDateContract());
 
-        EmployeeAddress address = new EmployeeAddress();
-        address.setAddress(dto.getAddress().getAddress());
-        address.setZipCode(dto.getAddress().getZipCode());
-        address.setCity(dto.getAddress().getCity());
+        // Address
+        EmployeeAddress address = new EmployeeAddress(
+                dto.getAddress().getAddress(),
+                dto.getAddress().getZipCode(),
+                dto.getAddress().getCity()
+        );
 
-        EmployeeFinanceInfo finance = new EmployeeFinanceInfo();
-        finance.setRoleName(dto.getFinanceInfo().getRoleName());
-        finance.setBaseSalary(dto.getFinanceInfo().getBaseSalary());
+        // Finance
+        EmployeeFinanceInfo finance = new EmployeeFinanceInfo(
+                dto.getFinanceInfo().getRoleName(),
+                dto.getFinanceInfo().getBaseSalary()
+        );
 
         employee.setAddress(address);
         employee.setFinanceInfo(finance);
 
         return employeeRepo.save(employee);
     }
-
-
-
 }

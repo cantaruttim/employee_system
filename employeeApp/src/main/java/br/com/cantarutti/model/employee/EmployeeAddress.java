@@ -3,14 +3,14 @@ package br.com.cantarutti.model.employee;
 public class EmployeeAddress {
 
     private String address;
-    private String zipcode;
+    private String zipCode;
     private String city;
 
     public EmployeeAddress() {}
 
-    public EmployeeAddress(String address, String zipcode, String city) {
+    public EmployeeAddress(String address, String zipCode, String city) {
         this.address = address;
-        this.zipcode = zipcode;
+        this.zipCode = zipCode;
         this.city = city;
     }
 
@@ -22,12 +22,12 @@ public class EmployeeAddress {
         this.address = address;
     }
 
-    public String getZipcode() {
-        return zipcode;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getCity() {

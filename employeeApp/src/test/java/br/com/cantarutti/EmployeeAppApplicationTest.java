@@ -35,17 +35,17 @@ public class EmployeeAppApplicationTest {
 
         String id = "550e8400-e29b-41d4-a716-446655440000";
 
-        fake.setId(UUID.fromString(id));
+        fake.setId(String.valueOf(UUID.fromString(id)));
         fake.setName("Alice");
-        when(repository.findById(UUID.fromString(id))).thenReturn(Optional.of(fake));
+        when(repository.findById(String.valueOf(UUID.fromString(id)))).thenReturn(Optional.of(fake));
 
         // when
-        EmployeeDTO result = service.findById(UUID.fromString(id));
+        EmployeeDTO result = service.findById(String.valueOf(UUID.fromString(id)));
 
         // then
         assertNotNull(result);
         assertEquals("Alice", result.getName());
-        verify(repository).findById(UUID.fromString(id));
+        verify(repository).findById(String.valueOf(UUID.fromString(id)));
     }
 
 
@@ -53,22 +53,22 @@ public class EmployeeAppApplicationTest {
     public void findById_WhenEmployeeNotFound() {
         UUID id = UUID.randomUUID();
 
-        when(repository.findById(id)).thenReturn(Optional.empty());
+        when(repository.findById(String.valueOf(id))).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, () -> service.findById(id));
+        assertThrows(RuntimeException.class, () -> service.findById(String.valueOf(id)));
 
-        verify(repository).findById(id);
+        verify(repository).findById(String.valueOf(id));
     }
 
     @Test
     public void shouldReturnAllEmployees() {
 
         Employee e1 = new Employee();
-        e1.setId(UUID.randomUUID());
+        e1.setId(String.valueOf(UUID.randomUUID()));
         e1.setName("Alice");
 
         Employee e2 = new Employee();
-        e2.setId(UUID.randomUUID());
+        e2.setId(String.valueOf(UUID.randomUUID()));
         e2.setName("Bob");
 
         when(repository.findAll()).thenReturn(List.of(e1, e2));
@@ -89,7 +89,7 @@ public class EmployeeAppApplicationTest {
     public void shouldUpdateLocation() {
         UUID id = UUID.randomUUID();
         Employee employee = new Employee();
-        employee.setId(id);
+        employee.setId(String.valueOf(id));
         employee.setLat(-23.55);
         employee.setLon(-46.63);
         employee.setName("Alice");
@@ -97,11 +97,11 @@ public class EmployeeAppApplicationTest {
         System.out.printf("Employee: " + employee.getName() + "\n" + "POSITION: " + "\n" + "  Lat: " + employee.getLat() + "\n" + "  Lon: " +  employee.getLon() );
 
         // Mock do findById
-        when(repository.findById(id)).thenReturn(Optional.of(employee));
+        when(repository.findById(String.valueOf(id))).thenReturn(Optional.of(employee));
         // Mock do save, retornando o próprio employee
         when(repository.save(any(Employee.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        EmployeeDTO result = service.updatedLocation(id, -20.00, -35.18);
+        EmployeeDTO result = service.updatedLocation(String.valueOf(id), -20.00, -35.18);
 
         assertEquals(-20.00, result.getLat());
         assertEquals(-35.18, result.getLon());

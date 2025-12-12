@@ -9,5 +9,7 @@ public class EmployeeHumanResources extends Employee {
     public String getDepartmentLocated() {
         return "HUMAN_RESOURCES";
     }
-    
+
 }
+
+
