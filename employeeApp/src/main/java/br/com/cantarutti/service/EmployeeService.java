@@ -6,44 +6,29 @@ import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
 import br.com.cantarutti.repository.employee.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
 
 @Service
 public class EmployeeService {
 
-    @Autowired
-    private EmployeeRepository employeeRepo;
+    private final EmployeeRepository employeeRepo;
 
     public EmployeeService(EmployeeRepository employeeRepo) {
         this.employeeRepo = employeeRepo;
     }
 
     // -------------------------------------------------------------
-    // UPDATE ONLY LOCATION
-    // -------------------------------------------------------------
-    public EmployeeDTO updatedLocation(String id, Double lat, Double lon) {
-
-        Employee employee = employeeRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
-
-        employee.setLat(lat);
-        employee.setLon(lon);
-
-        Employee updated = employeeRepo.save(employee);
-        return EmployeeMapper.toDTO(updated);
-    }
-
-
-    // -------------------------------------------------------------
     // CREATE
     // -------------------------------------------------------------
     public EmployeeDTO save(EmployeeDTO dto) {
-        Employee employee = EmployeeMapper.toEntity(dto);
 
-        employee.setId(null); // Mongo irá criar ObjectId automaticamente
+        Employee employee = EmployeeMapper.toEntity(dto);
+        employee.setId(null); // Mongo gera o ID
 
         Employee saved = employeeRepo.save(employee);
         return EmployeeMapper.toDTO(saved);
@@ -65,7 +50,12 @@ public class EmployeeService {
     public EmployeeDTO findById(String id) {
 
         Employee employee = employeeRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Employee not found: " + id
+                        )
+                );
 
         return EmployeeMapper.toDTO(employee);
     }
@@ -76,7 +66,12 @@ public class EmployeeService {
     public EmployeeDTO update(String id, EmployeeDTO dto) {
 
         Employee employee = employeeRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Employee not found: " + id
+                        )
+                );
 
         // Dados básicos
         employee.setEmployeeName(dto.getEmployeeName());
@@ -86,63 +81,64 @@ public class EmployeeService {
         employee.setLevelPosition(dto.getLevelPosition());
         employee.setStatusEmployee(dto.getStatusEmployee());
 
-        // Address
-        EmployeeAddress address = employee.getAddress();
-        var addressDTO = dto.getAddress();
-        address.setAddress(addressDTO.getAddress());
-        address.setCity(addressDTO.getCity());
-        address.setZipCode(addressDTO.getZipCode());
+        // Address (garante não-null)
+        if (employee.getAddress() == null) {
+            employee.setAddress(new EmployeeAddress());
+        }
 
-        // Finance
-        EmployeeFinanceInfo finance = employee.getFinanceInfo();
-        var financeDTO = dto.getFinanceInfo();
-        finance.setBaseSalary(financeDTO.getBaseSalary());
-        finance.setRoleName(financeDTO.getRoleName());
+        if (dto.getAddress() != null) {
+            employee.getAddress().setAddress(dto.getAddress().getAddress());
+            employee.getAddress().setCity(dto.getAddress().getCity());
+            employee.getAddress().setZipCode(dto.getAddress().getZipCode());
+        }
 
-        employeeRepo.save(employee);
+        // Finance (garante não-null)
+        if (employee.getFinanceInfo() == null) {
+            employee.setFinanceInfo(new EmployeeFinanceInfo());
+        }
 
-        return EmployeeMapper.toDTO(employee);
+        if (dto.getFinanceInfo() != null) {
+            employee.getFinanceInfo().setBaseSalary(dto.getFinanceInfo().getBaseSalary());
+            employee.getFinanceInfo().setRoleName(dto.getFinanceInfo().getRoleName());
+        }
+
+        Employee updated = employeeRepo.save(employee);
+        return EmployeeMapper.toDTO(updated);
     }
 
     // -------------------------------------------------------------
-    // DELETE (agora só remove o documento principal)
+    // UPDATE ONLY LOCATION
+    // -------------------------------------------------------------
+    public EmployeeDTO updatedLocation(String id, Double lat, Double lon) {
+
+        Employee employee = employeeRepo.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Employee not found: " + id
+                        )
+                );
+
+        employee.setLat(lat);
+        employee.setLon(lon);
+
+        Employee updated = employeeRepo.save(employee);
+        return EmployeeMapper.toDTO(updated);
+    }
+
+    // -------------------------------------------------------------
+    // DELETE
     // -------------------------------------------------------------
     public void delete(String id) {
 
-        Employee employee = employeeRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found: " + id));
+        if (!employeeRepo.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Employee not found: " + id
+            );
+        }
 
-        employeeRepo.delete(employee);
-    }
-
-    // -------------------------------------------------------------
-    // CREATE MANUAL
-    // -------------------------------------------------------------
-    public Employee createEmployee(EmployeeDTO dto) {
-
-        Employee employee = new Employee();
-        employee.setId(null); // Mongo cria ID
-
-        employee.setRegistrationNumber(dto.getRegistrationNumber());
-        employee.setEmployeeName(dto.getEmployeeName());
-        employee.setDateContract(dto.getDateContract());
-
-        // Address
-        EmployeeAddress address = new EmployeeAddress(
-                dto.getAddress().getAddress(),
-                dto.getAddress().getZipCode(),
-                dto.getAddress().getCity()
-        );
-
-        // Finance
-        EmployeeFinanceInfo finance = new EmployeeFinanceInfo(
-                dto.getFinanceInfo().getRoleName(),
-                dto.getFinanceInfo().getBaseSalary()
-        );
-
-        employee.setAddress(address);
-        employee.setFinanceInfo(finance);
-
-        return employeeRepo.save(employee);
+        employeeRepo.deleteById(id);
     }
 }
+

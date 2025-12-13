@@ -2,73 +2,56 @@ package br.com.cantarutti.controller;
 
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService service;
+    private final EmployeeService service;
 
     public EmployeeController(EmployeeService service) {
         this.service = service;
     }
 
-    @PostMapping("/v1/employees")
+    @PostMapping
     public ResponseEntity<EmployeeDTO> create(
             @RequestBody EmployeeDTO dto
     ) {
-        dto.setId(null);
+        dto.setId(null); // Mongo gera o id
         EmployeeDTO saved = service.save(dto);
         return ResponseEntity.status(201).body(saved);
     }
 
-    @GetMapping("/v1/list_all/employees")
+    @GetMapping
     public ResponseEntity<List<EmployeeDTO>> listAll() {
-        List<EmployeeDTO> list = service.listAll();
-        return ResponseEntity.ok(list);
+        return ResponseEntity.ok(service.listAll());
     }
 
-    @GetMapping("/v1/list/{id}/employee")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDTO> getById(
             @PathVariable String id
     ) {
-        EmployeeDTO dto = service.findById(String.valueOf(UUID.fromString(id)));
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(service.findById(id));
     }
 
-    @PutMapping("/v1/update/{id}/employee")
+    @PutMapping("/{id}")
     public ResponseEntity<EmployeeDTO> update(
             @PathVariable String id,
             @RequestBody EmployeeDTO dto
     ) {
-        EmployeeDTO updated = service.update(String.valueOf(UUID.fromString(id)), dto);
-        return ResponseEntity.ok(updated);
+        return ResponseEntity.ok(service.update(id, dto));
     }
 
-    @PutMapping("/v1/update/{id}/employee/location")
-    public ResponseEntity<EmployeeDTO> updateLocation(
-            @PathVariable String id,
-            @RequestParam Double lat,
-            @RequestParam Double lon
-            ) {
-        EmployeeDTO updated = service.updatedLocation(String.valueOf(UUID.fromString(id)), lat, lon);
-        return ResponseEntity.ok(updated);
-    }
-
-
-    @DeleteMapping("/v1/delete/{id}/employee")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @PathVariable String id
     ) {
-        service.delete(String.valueOf(UUID.fromString(id)));
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
+
