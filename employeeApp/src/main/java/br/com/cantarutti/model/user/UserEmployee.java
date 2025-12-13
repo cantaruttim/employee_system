@@ -1,55 +1,64 @@
 package br.com.cantarutti.model.user;
 
 import br.com.cantarutti.enums.EmployeeStatus;
-import br.com.cantarutti.model.department.EmployeeCoordination;
 import br.com.cantarutti.model.employee.Employee;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "tb_user")
 public class UserEmployee extends Employee {
     // represent the User after has been posted
-    // will be used to login on page
-    // think of a better class name
+    // will be used to log in on page
 
-    private EmployeeCoordination userNameSystem;
-
-    // BCrypt
-    private EmployeeCoordination userPasswordSystem;
-    private EmployeeStatus status;
+    @Id
+    private String userNameSystem;
+    private String userPasswordSystem;
+    private EmployeeStatus userStatus;
+    private boolean firstLogin;
 
     public UserEmployee() {}
 
     public UserEmployee(
-            EmployeeCoordination userNameSystem,
-            EmployeeCoordination userPasswordSystem,
-            EmployeeStatus status
-    ) {
+            String userNameSystem,
+            String userPasswordSystem,
+            EmployeeStatus userStatus,
+            boolean firstLogin
+    ){
         this.userNameSystem = userNameSystem;
         this.userPasswordSystem = userPasswordSystem;
-        this.status = status;
+        this.userStatus = userStatus;
+        this.firstLogin = firstLogin;
     }
 
-    public EmployeeCoordination getUserNameSystem() {
+    public String getUserNameSystem() {
         return userNameSystem;
     }
 
-    public void setUserNameSystem(EmployeeCoordination userNameSystem) {
+    public void setUserNameSystem(String userNameSystem) {
         this.userNameSystem = userNameSystem;
     }
 
-    public EmployeeCoordination getUserPasswordSystem() {
+    public String getUserPasswordSystem() {
         return userPasswordSystem;
     }
 
-    public void setUserPasswordSystem(EmployeeCoordination userPasswordSystem) {
+    public void setUserPasswordSystem(String userPasswordSystem) {
         this.userPasswordSystem = userPasswordSystem;
     }
 
-    public EmployeeStatus getStatus() {
-        return status;
+    public EmployeeStatus getUserStatus() {
+        return userStatus;
     }
 
-    public void setStatus(EmployeeStatus status) {
-        this.status = status;
+    public void setUserStatus(EmployeeStatus userStatus) {
+        this.userStatus = userStatus;
+    }
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 }

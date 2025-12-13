@@ -59,7 +59,9 @@ public class EmployeeCoordination extends Employee {
 
     public String defaultPassword(String registrationNumber) {
 
-        if (registrationNumber != null ) {
+        if (registrationNumber == null || registrationNumber.length() < 4) {
+            throw new IllegalArgumentException("Invalid registration number");
+        } else {
             LocalDate today = LocalDate.now();
             int year = today.getYear();
             int month = today.getMonthValue();
@@ -70,6 +72,5 @@ public class EmployeeCoordination extends Employee {
             String formattedMonth = String.format("%02d", month);
             return year + formattedMonth + lastDigitisOfRegistrationNumber;
         }
-        return null;
     }
 }

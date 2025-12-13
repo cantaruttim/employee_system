@@ -30,6 +30,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- Crypto Password -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
         <!-- MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,13 +49,6 @@
             <version>2.7.0</version>
         </dependency>
 
-        <!-- Lombok (necessário no POM e no annotationProcessor) -->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.30</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
 
         <!-- YAML Reader -->
         <dependency>
