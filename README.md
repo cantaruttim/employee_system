@@ -42,6 +42,13 @@ This class is the most complex one. Because we have some business rules related 
 
 ## EmployeeController
 
+The Basic CRUD controller where we can create, updated, delete and list the information regarding an Employee
+
 ## UserController
 
+Controller responsible to get information about the users.
+Those information must not be deleted! 
+
 ## AuthController
+
+Controller that is responsible to authenticate an User after the Employee were created.
