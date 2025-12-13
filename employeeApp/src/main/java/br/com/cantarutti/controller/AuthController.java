@@ -21,14 +21,18 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        return userService.login(request);
+
+        userService.login(request);
+
+        return ResponseEntity.ok("Login successful");
     }
 
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(
             @RequestBody ChangePasswordRequest request
     ) {
-        return userService.changePassword(request);
-    }
+        userService.changePassword(request);
 
+        return ResponseEntity.ok("Password changed successfully");
+    }
 }

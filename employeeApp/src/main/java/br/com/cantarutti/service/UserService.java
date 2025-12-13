@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
+import br.com.cantarutti.config.utils.PassWordUtils;
 
 @Service
 public class UserService {
@@ -30,64 +31,86 @@ public class UserService {
         this.employeeCoordination = employeeCoordination;
     }
 
+    // -------------------------------
+    // CREATE USER FROM EMPLOYEE
+    // -------------------------------
     public UserEmployee createUserFromEmployee(EmployeeDTO dto) {
 
         String rawPassword =
-                employeeCoordination.defaultPassword(
-                        dto.getRegistrationNumber()
-                );
+                PassWordUtils.defaultPassword(dto.getRegistrationNumber());
 
         UserEmployee user = new UserEmployee();
-
         user.setUserNameSystem(dto.getRegistrationNumber());
         user.setUserPasswordSystem(passwordEncoder.encode(rawPassword));
         user.setFirstLogin(true);
         user.setEmployeeId(dto.getId());
 
-        userRepo.save(user);
-
-        return user;
+        return userRepo.save(user);
     }
 
-    // validate if it's a first login
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    // -------------------------------
+    // LOGIN
+    // -------------------------------
+    public void login(LoginRequest request) {
 
-        UserEmployee user = userRepo.findById(request.getUserName())
+        UserEmployee user = userRepo
+                .findByUserNameSystem(request.getUserName())
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials")
+                        new ResponseStatusException(
+                                HttpStatus.UNAUTHORIZED, "Invalid credentials"
+                        )
                 );
 
-        boolean valid = passwordEncoder.matches(request.getUserPassword(), user.getUserPasswordSystem());
+        boolean valid =
+                passwordEncoder.matches(
+                        request.getUserPassword(),
+                        user.getUserPasswordSystem()
+                );
+
         if (!valid) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, "Invalid credentials"
+            );
         }
 
         if (user.isFirstLogin()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN)
-                    .body("Please change your password on your first login.");
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Please change your password on first login"
+            );
         }
-
-        return ResponseEntity.ok("Login successful");
     }
 
+    // -------------------------------
+    // CHANGE PASSWORD
+    // -------------------------------
+    public void changePassword(ChangePasswordRequest request) {
 
-    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
-
-        UserEmployee user = userRepo.findById(request.getUserName())
+        UserEmployee user = userRepo
+                .findByUserNameSystem(request.getUserName())
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found")
+                        new ResponseStatusException(
+                                HttpStatus.UNAUTHORIZED, "User not found"
+                        )
                 );
 
-        boolean validOldPassword = passwordEncoder.matches(request.getOldPassword(), user.getUserNameSystem());
+        boolean validOldPassword =
+                passwordEncoder.matches(
+                        request.getOldPassword(),
+                        user.getUserPasswordSystem()
+                );
+
         if (!validOldPassword) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is incorrect");
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "Old password is incorrect"
+            );
         }
 
-        user.setUserPasswordSystem(passwordEncoder.encode(request.getNewPassword()));
+        user.setUserPasswordSystem(
+                passwordEncoder.encode(request.getNewPassword())
+        );
         user.setFirstLogin(false);
+
         userRepo.save(user);
-
-        return ResponseEntity.ok("Password changed successfully.");
     }
-
 }

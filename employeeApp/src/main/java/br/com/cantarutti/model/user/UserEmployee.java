@@ -3,17 +3,23 @@ package br.com.cantarutti.model.user;
 import br.com.cantarutti.enums.EmployeeStatus;
 import br.com.cantarutti.model.employee.Employee;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "tb_user")
-public class UserEmployee extends Employee {
+public class UserEmployee {
     // represent the User after has been posted
     // will be used to log in on page
 
     @Id
+    private String id;
+
+    @Indexed(unique=true)
     private String userNameSystem;
     private String userPasswordSystem;
+
     private EmployeeStatus userStatus;
+
     private boolean firstLogin;
     private String employeeId;
 
