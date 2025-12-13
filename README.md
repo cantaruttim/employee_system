@@ -13,11 +13,12 @@ Build in two parts. Front and Backend.
 <i>developing</i>
 
 ## Employee
+<i>developing</i>
+
 ![Employee Architecture](https://onedrive.live.com/?viewid=68a9aec8%2D4a26%2D4b21%2D995d%2D445e3dde2e72&id=%2Fpersonal%2Ff32956ecda08321a%2FDocuments%2FDocuments%2FPessoal%2FConsulting%2FEmployee%20System%2FScreenshot%202025%2D12%2D13%20at%2017%2E49%2E53%2Epng&parent=%2Fpersonal%2Ff32956ecda08321a%2FDocuments%2FDocuments%2FPessoal%2FConsulting%2FEmployee%20System)
 
 ## Users
 ![User Architecture](https://onedrive.live.com/?viewid=68a9aec8%2D4a26%2D4b21%2D995d%2D445e3dde2e72&id=%2Fpersonal%2Ff32956ecda08321a%2FDocuments%2FDocuments%2FPessoal%2FConsulting%2FEmployee%20System%2FScreenshot%202025%2D12%2D13%20at%2017%2E45%2E08%2Epng&parent=%2Fpersonal%2Ff32956ecda08321a%2FDocuments%2FDocuments%2FPessoal%2FConsulting%2FEmployee%20System)
-
 
 # Models
 <i>developing</i>
