@@ -16,10 +16,10 @@ Build in two parts. Front and Backend.
 <i>developing</i>
 
 ## Employee
-![Employee Architecture](docs/img/employee_architecture.png)
+![Employee Architecture](imgs/employee_architecture.png)
 
 ## Users
-![User Architecture](docs/img/user_architecture.png)
+![User Architecture](imgs/user_architecture.png)
 
 # Models
 <i>developing</i>
