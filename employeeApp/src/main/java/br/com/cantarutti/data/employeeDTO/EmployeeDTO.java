@@ -135,11 +135,12 @@ public class EmployeeDTO {
         this.lon = lon;
     }
 
-    public EmployeeCoordinationDTO getEmployeeCoordinationDTO() {
+    public EmployeeCoordinationDTO getEmployeeCoordination() {
         return employeeCoordinationDTO;
     }
 
     public void setEmployeeCoordinationDTO(EmployeeCoordinationDTO employeeCoordinationDTO) {
         this.employeeCoordinationDTO = employeeCoordinationDTO;
     }
+
 }

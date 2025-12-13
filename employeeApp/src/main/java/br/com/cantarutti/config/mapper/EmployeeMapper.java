@@ -49,6 +49,13 @@ public class EmployeeMapper {
         }
 
         // Coordination
+        if (dto.getEmployeeCoordination() != null) {
+            EmployeeCoordination coordination = new EmployeeCoordination();
+            coordination.setEmployeeOnOficial(dto.getEmployeeCoordination().getEmployeeOnOficial());
+            coordination.setRolePositionName(dto.getEmployeeCoordination().getRolePositionName());
+            coordination.setUserNameSystem(dto.getEmployeeCoordination().getUserNameSystem());
+            coordination.setUserPasswordSystem(dto.getEmployeeCoordination().getUserPasswordSystem());
+        }
 
         return employee;
     }
