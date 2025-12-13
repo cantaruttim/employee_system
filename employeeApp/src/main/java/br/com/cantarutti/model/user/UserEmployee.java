@@ -15,6 +15,7 @@ public class UserEmployee extends Employee {
     private String userPasswordSystem;
     private EmployeeStatus userStatus;
     private boolean firstLogin;
+    private String employeeId;
 
     public UserEmployee() {}
 
@@ -60,5 +61,13 @@ public class UserEmployee extends Employee {
 
     public void setFirstLogin(boolean firstLogin) {
         this.firstLogin = firstLogin;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 }
