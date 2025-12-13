@@ -10,7 +10,6 @@ public class UserEmployee extends Employee {
     private EmployeeCoordination userNameSystem;
     private EmployeeCoordination userPasswordSystem;
 
-
     public UserEmployee() {}
 
     public UserEmployee(

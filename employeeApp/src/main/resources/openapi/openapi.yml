@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Employee System API
-  description: API para gerenciamento de funcionários, endereços, dados financeiros e usuários
+  description: API for managing employees, addresses, financial data, and users
   version: 1.0.0
 
 servers:
@@ -16,12 +16,12 @@ paths:
 
   /api/v1/employees:
     get:
-      summary: Lista todos os funcionários
+      summary: List all employees
       tags:
         - Employees
       responses:
         "200":
-          description: Lista de funcionários
+          description: List of employees
           content:
             application/json:
               schema:
@@ -30,7 +30,7 @@ paths:
                   $ref: "#/components/schemas/EmployeeDTO"
 
     post:
-      summary: Cria um novo funcionário completo
+      summary: Create a new complete employee
       tags:
         - Employees
       requestBody:
@@ -41,7 +41,7 @@ paths:
               $ref: "#/components/schemas/EmployeeDTO"
       responses:
         "201":
-          description: Funcionário criado com sucesso
+          description: Employee created successfully
           content:
             application/json:
               schema:
@@ -49,7 +49,7 @@ paths:
 
   /api/v1/employees/{id}:
     get:
-      summary: Recupera funcionário por ID
+      summary: Retrieve an employee by ID
       tags:
         - Employees
       parameters:
@@ -61,16 +61,16 @@ paths:
           required: true
       responses:
         "200":
-          description: Funcionário encontrado
+          description: Employee found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/EmployeeDTO"
         "404":
-          description: Funcionário não encontrado
+          description: Employee not found
 
     put:
-      summary: Atualiza um funcionário existente
+      summary: Update an existing employee
       tags:
         - Employees
       parameters:
@@ -88,16 +88,16 @@ paths:
               $ref: "#/components/schemas/EmployeeDTO"
       responses:
         "200":
-          description: Funcionário atualizado
+          description: Employee updated
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/EmployeeDTO"
         "404":
-          description: Funcionário não encontrado
+          description: Employee not found
 
     delete:
-      summary: Remove um funcionário
+      summary: Remove an employee
       tags:
         - Employees
       parameters:
@@ -109,10 +109,9 @@ paths:
             format: uuid
       responses:
         "204":
-          description: Funcionário removido
+          description: Employee removed
         "404":
-          description: Funcionário não encontrado
-
+          description: Employee not found
 
   # ============================================
   # ================= USERS =====================
@@ -120,12 +119,12 @@ paths:
 
   /api/v1/users:
     get:
-      summary: Lista todos os usuários
+      summary: List all users
       tags:
         - Users
       responses:
         "200":
-          description: Lista de usuários
+          description: List of users
           content:
             application/json:
               schema:
@@ -134,7 +133,7 @@ paths:
                   $ref: "#/components/schemas/UserDTO"
 
     post:
-      summary: Cria um novo usuário
+      summary: Create a new user
       tags:
         - Users
       requestBody:
@@ -145,7 +144,7 @@ paths:
               $ref: "#/components/schemas/UserCreateDTO"
       responses:
         "201":
-          description: Usuário criado
+          description: User created
           content:
             application/json:
               schema:
@@ -153,7 +152,7 @@ paths:
 
   /api/v1/users/{id}:
     get:
-      summary: Retorna um usuário pelo ID
+      summary: Retrieve a user by ID
       tags:
         - Users
       parameters:
@@ -165,16 +164,16 @@ paths:
             format: uuid
       responses:
         "200":
-          description: Usuário encontrado
+          description: User found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDTO"
         "404":
-          description: Usuário não encontrado
+          description: User not found
 
     put:
-      summary: Atualiza um usuário existente
+      summary: Update an existing user
       tags:
         - Users
       parameters:
@@ -192,16 +191,16 @@ paths:
               $ref: "#/components/schemas/UserCreateDTO"
       responses:
         "200":
-          description: Usuário atualizado
+          description: User updated
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDTO"
         "404":
-          description: Usuário não encontrado
+          description: User not found
 
     delete:
-      summary: Remove um usuário
+      summary: Remove a user
       tags:
         - Users
       parameters:
@@ -213,10 +212,9 @@ paths:
             format: uuid
       responses:
         "204":
-          description: Usuário removido
+          description: User removed
         "404":
-          description: Usuário não encontrado
-
+          description: User not found
 
 components:
   schemas:
@@ -284,7 +282,6 @@ components:
         - roleName
         - baseSalary
 
-
     # ================== USERS ====================
     UserDTO:
       type: object
@@ -296,7 +293,7 @@ components:
           type: string
         userEmail:
           type: string
-        userPerfil:
+        userProfile:
           type: string
           enum: [ADMIN, USER]
         userDateCreate:
@@ -312,11 +309,11 @@ components:
           type: string
         userPassword:
           type: string
-        userPerfil:
+        userProfile:
           type: string
           enum: [ADMIN, USER]
       required:
         - userName
         - userEmail
         - userPassword
-        - userPerfil
+        - userProfile
