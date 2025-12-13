@@ -84,7 +84,7 @@ public class EmployeeService {
         employee.setDateContract(dto.getDateContract());
         employee.setDepartmentLocated(dto.getDepartmentLocated());
         employee.setLevelPosition(dto.getLevelPosition());
-        employee.setStatusEmployee(dto.getStatusEmployee(employee.getStatusEmployee()));
+        employee.setStatusEmployee(dto.getStatusEmployee());
 
         // Address
         EmployeeAddress address = employee.getAddress();

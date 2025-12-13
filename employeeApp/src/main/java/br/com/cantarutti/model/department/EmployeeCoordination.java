@@ -2,13 +2,15 @@ package br.com.cantarutti.model.department;
 
 import br.com.cantarutti.model.employee.Employee;
 
+import java.time.LocalDate;
+
 public class EmployeeCoordination extends Employee {
     // represent the Coordination or a Manager of the respective Employee after has been posted
     // think of a better class name
 
     private String rolePositionName;
     private String employeeOnOficial;
-    private String userNameSystem;
+    private String userNameSystem; // to simplify, could be the registrationNumber
     private String userPasswordSystem;
 
     public EmployeeCoordination() {}
@@ -30,6 +32,22 @@ public class EmployeeCoordination extends Employee {
         return "N10";
     }
 
+    public String getRolePositionName() {
+        return rolePositionName;
+    }
+
+    public void setRolePositionName(String rolePositionName) {
+        this.rolePositionName = rolePositionName;
+    }
+
+    public String getEmployeeOnOficial() {
+        return employeeOnOficial;
+    }
+
+    public void setEmployeeOnOficial(String employeeOnOficial) {
+        this.employeeOnOficial = employeeOnOficial;
+    }
+
     // must be seen by the respective employee
     public String userNameSystem() {
       return userNameSystem;
@@ -39,4 +57,19 @@ public class EmployeeCoordination extends Employee {
       return userPasswordSystem;
     }
 
+    public String defaultPassword(String registrationNumber) {
+
+        if (registrationNumber != null ) {
+            LocalDate today = LocalDate.now();
+            int year = today.getYear();
+            int month = today.getMonthValue();
+
+            String lastDigitisOfRegistrationNumber = registrationNumber.substring(
+                    registrationNumber.length() - 4
+            );
+            String formattedMonth = String.format("%02d", month);
+            return year + formattedMonth + lastDigitisOfRegistrationNumber;
+        }
+        return null;
+    }
 }
