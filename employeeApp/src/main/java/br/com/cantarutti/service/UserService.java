@@ -39,6 +39,59 @@ public class UserService {
                 .toList();
     }
 
+    // -------------------------------------------------------------
+    // FIND BY ID
+    // -------------------------------------------------------------
+    public UserDTO findById(String id) {
+
+        UserEmployee user = userRepo.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User not found: " + id
+                        )
+                );
+
+        return UserMapper.toDTO(user);
+    }
+
+    // -------------------------------------------------------------
+    // UPDATE
+    // -------------------------------------------------------------
+    public UserDTO update(String id, UserDTO dto) {
+
+        UserEmployee user = userRepo.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "User not found: " + id
+                        )
+                );
+
+        user.setUserNameSystem(dto.getUserNameSystem());
+        user.setUserPasswordSystem(dto.getUserPasswordSystem());
+        user.setFirstLogin(dto.isFirstLogin());
+        user.setEmployeeId(dto.getEmployeeId());
+
+        UserEmployee updated = userRepo.save(user);
+        return UserMapper.toDTO(updated);
+    }
+
+
+    // -------------------------------------------------------------
+    // DELETE
+    // -------------------------------------------------------------
+    public void delete(String id) {
+
+        if (!userRepo.existsById(id)) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "User not found: " + id
+            );
+        }
+
+        userRepo.deleteById(id);
+    }
 
 
     // -------------------------------
