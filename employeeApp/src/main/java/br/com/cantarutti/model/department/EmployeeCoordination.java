@@ -2,8 +2,6 @@ package br.com.cantarutti.model.department;
 
 import br.com.cantarutti.model.employee.Employee;
 
-import java.time.LocalDate;
-
 public class EmployeeCoordination extends Employee {
     // represent the Coordination or a Manager of the respective Employee after has been posted
     // think of a better class name

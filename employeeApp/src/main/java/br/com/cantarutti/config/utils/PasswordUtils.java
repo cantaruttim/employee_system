@@ -2,10 +2,13 @@ package br.com.cantarutti.config.utils;
 
 import java.time.LocalDate;
 
-public class PassWordUtils {
+public class PasswordUtils {
 
     public static String defaultPassword(String registrationNumber) {
-        if (registrationNumber == null) return null;
+
+        if (registrationNumber == null || registrationNumber.length() < 4) {
+            throw new IllegalArgumentException("Invalid registration number");
+        }
 
         LocalDate today = LocalDate.now();
         int year = today.getYear();
