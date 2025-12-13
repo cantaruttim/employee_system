@@ -16,6 +16,7 @@ public class EmployeeDTO {
     private EmployeeStatus statusEmployee;
     private EmployeeAddressDTO address;
     private EmployeeFinanceInfoDTO financeInfo;
+    private EmployeeCoordinationDTO employeeCoordinationDTO;
 
     private Double lat;
     private Double lon;

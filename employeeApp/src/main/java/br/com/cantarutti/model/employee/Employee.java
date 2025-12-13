@@ -1,6 +1,7 @@
 package br.com.cantarutti.model.employee;
 
 import br.com.cantarutti.enums.EmployeeStatus;
+import br.com.cantarutti.model.department.EmployeeCoordination;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 public class Employee {
 
     @Id
-    private String id;  // MongoDB usa String (ObjectId como padrão)
+    private String id;
 
     private String registrationNumber;
     private String employeeName;
@@ -22,10 +23,9 @@ public class Employee {
 
     private EmployeeStatus statusEmployee;
 
-    // Agora documentos internos embutidos (MongoDB não suporta @OneToOne)
     private EmployeeAddress address;
-
     private EmployeeFinanceInfo financeInfo;
+    private EmployeeCoordination employeeCoordination;
 
     // GeoLocation
     @Field("lat")
@@ -46,6 +46,7 @@ public class Employee {
             EmployeeStatus statusEmployee,
             EmployeeAddress address,
             EmployeeFinanceInfo financeInfo,
+            EmployeeCoordination employeeCoordination,
             Double lat,
             Double lon
     ) {
@@ -58,6 +59,7 @@ public class Employee {
         this.statusEmployee = statusEmployee;
         this.address = address;
         this.financeInfo = financeInfo;
+        this.employeeCoordination = employeeCoordination;
         this.lat = lat;
         this.lon = lon;
     }
@@ -148,5 +150,13 @@ public class Employee {
 
     public void setLon(Double lon) {
         this.lon = lon;
+    }
+
+    public EmployeeCoordination getEmployeeCoordination() {
+        return employeeCoordination;
+    }
+
+    public void setEmployeeCoordination(EmployeeCoordination employeeCoordination) {
+        this.employeeCoordination = employeeCoordination;
     }
 }

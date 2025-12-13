@@ -57,7 +57,7 @@ paths:
           name: id
           schema:
             type: string
-            format: uuid
+            format: string
           required: true
       responses:
         "200":
@@ -78,7 +78,7 @@ paths:
           name: id
           schema:
             type: string
-            format: uuid
+            format: string
           required: true
       requestBody:
         required: true
@@ -106,7 +106,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: string
       responses:
         "204":
           description: Employee removed
@@ -161,7 +161,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: string
       responses:
         "200":
           description: User found
@@ -182,7 +182,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: string
       requestBody:
         required: true
         content:
@@ -209,7 +209,7 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
+            format: string
       responses:
         "204":
           description: User removed
@@ -225,7 +225,7 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          format: string
         registrationNumber:
           type: string
         name:
@@ -249,7 +249,7 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          format: string
         registrationNumber:
           type: string
         address:
@@ -269,7 +269,7 @@ components:
       properties:
         id:
           type: string
-          format: uuid
+          format: string
         registrationNumber:
           type: string
         roleName:
@@ -288,7 +288,7 @@ components:
       properties:
         userId:
           type: string
-          format: uuid
+          format: string
         userName:
           type: string
         userEmail:
