@@ -1,8 +1,10 @@
 package br.com.cantarutti.service;
 
+import br.com.cantarutti.config.mapper.UserMapper;
 import br.com.cantarutti.data.auth.ChangePasswordRequest;
 import br.com.cantarutti.data.auth.LoginRequest;
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
+import br.com.cantarutti.data.userDTO.UserDTO;
 import br.com.cantarutti.model.user.UserEmployee;
 import br.com.cantarutti.repository.user.UserRepository;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import br.com.cantarutti.config.utils.PasswordUtils;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -24,6 +28,18 @@ public class UserService {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
+
+    // -------------------------------
+    // LIST ALL
+    // -------------------------------
+    public List<UserDTO> listAll() {
+        return userRepo.findAll()
+                .stream()
+                .map(UserMapper::toDTO)
+                .toList();
+    }
+
+
 
     // -------------------------------
     // CREATE USER FROM EMPLOYEE
