@@ -22,8 +22,12 @@ public class EmployeeMapper {
         employee.setRegistrationNumber(dto.getRegistrationNumber());
         employee.setEmployeeName(dto.getEmployeeName());
         employee.setDateContract(dto.getDateContract());
-        employee.setLat(dto.getLat());
-        employee.setLon(dto.getLon());
+        employee.setDepartmentLocated(dto.getDepartmentLocated());
+        employee.setLevelPosition(dto.getLevelPosition());
+        employee.setStatusEmployee(dto.getStatusEmployee());
+
+        // employee.setLat(dto.getLat());
+        // employee.setLon(dto.getLon());
 
         // Address
         if (dto.getAddress() != null) {
@@ -53,12 +57,15 @@ public class EmployeeMapper {
         if (employee == null) return null;
 
         EmployeeDTO dto = new EmployeeDTO();
+
         dto.setId(employee.getId());
+
         dto.setRegistrationNumber(employee.getRegistrationNumber());
         dto.setEmployeeName(employee.getName());
         dto.setDateContract(employee.getDateContract());
-        dto.setLat(employee.getLat());
-        dto.setLon(employee.getLon());
+        dto.setDepartmentLocated(employee.getDepartmentLocated());
+        dto.setLevelPosition(employee.getLevelPosition());
+        dto.setStatusEmployee(employee.getStatusEmployee());
 
         // Address
         if (employee.getAddress() != null) {
@@ -66,7 +73,6 @@ public class EmployeeMapper {
             addrDTO.setAddress(employee.getAddress().getAddress());
             addrDTO.setZipCode(employee.getAddress().getZipCode());
             addrDTO.setCity(employee.getAddress().getCity());
-
             dto.setAddress(addrDTO);
         }
 
@@ -75,7 +81,6 @@ public class EmployeeMapper {
             EmployeeFinanceInfoDTO finDTO = new EmployeeFinanceInfoDTO();
             finDTO.setRoleName(employee.getFinanceInfo().getRoleName());
             finDTO.setBaseSalary(employee.getFinanceInfo().getBaseSalary());
-
             dto.setFinanceInfo(finDTO);
         }
 

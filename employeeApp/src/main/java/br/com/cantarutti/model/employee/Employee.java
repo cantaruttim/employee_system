@@ -111,7 +111,7 @@ public class Employee {
     }
 
     public EmployeeStatus getStatusEmployee() {
-        return statusEmployee;
+        return this.statusEmployee;
     }
 
     public void setStatusEmployee(EmployeeStatus statusEmployee) {
