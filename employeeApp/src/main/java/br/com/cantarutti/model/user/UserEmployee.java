@@ -1,7 +1,6 @@
 package br.com.cantarutti.model.user;
 
 import br.com.cantarutti.enums.EmployeeStatus;
-import br.com.cantarutti.model.employee.Employee;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
