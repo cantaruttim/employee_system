@@ -12,14 +12,13 @@ Build in two parts. Front and Backend.
 # Architecture
 <i>developing</i>
 
-## Employee
-<i>developing</i>
 
 ## Employee
 ![Employee Architecture](imgs/employee_architecture.png)
 
 ## Users
 ![User Architecture](imgs/user_architecture.png)
+
 
 # Models
 <i>developing</i>
