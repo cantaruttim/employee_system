@@ -6,6 +6,14 @@ public class EmployeeAddressDTO {
     private String zipCode;
     private String city;
 
+    public EmployeeAddressDTO() {}
+
+    public EmployeeAddressDTO(String address, String zipCode, String city) {
+        this.address = address;
+        this.zipCode = zipCode;
+        this.city = city;
+    }
+
     public String getAddress() {
         return address;
     }

@@ -1,5 +1,5 @@
 package br.com.cantarutti.data.employeeDTO;
-import br.com.cantarutti.model.enums.EmployeeStatus;
+import br.com.cantarutti.enums.EmployeeStatus;
 
 import java.time.LocalDate;
 
@@ -17,9 +17,32 @@ public class EmployeeDTO {
     private EmployeeAddressDTO address;
     private EmployeeFinanceInfoDTO financeInfo;
 
-    // GeoLocation
     private Double lat;
     private Double lon;
+
+    public EmployeeDTO() {}
+
+    public EmployeeDTO(
+            String id,
+            String registrationNumber,
+            String employeeName,
+            LocalDate dateContract,
+            String departmentLocated,
+            String levelPosition,
+            EmployeeStatus statusEmployee,
+            EmployeeAddressDTO address,
+            EmployeeFinanceInfoDTO financeInfo
+    ) {
+        this.id = id;
+        this.registrationNumber = registrationNumber;
+        this.employeeName = employeeName;
+        this.dateContract = dateContract;
+        this.departmentLocated = departmentLocated;
+        this.levelPosition = levelPosition;
+        this.statusEmployee = statusEmployee;
+        this.address = address;
+        this.financeInfo = financeInfo;
+    }
 
     public void EmployeeFinanceInfoDTO() {}
 

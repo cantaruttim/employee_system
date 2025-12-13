@@ -7,22 +7,30 @@ public class EmployeeCoordination extends Employee {
     // think of a better class name
 
     private String rolePositionName;
+    private String employeeOnOficial;
     private String userNameSystem;
     private String userPasswordSystem;
 
-    public String getLevelPosition() {
+    public EmployeeCoordination() {}
+
+    public EmployeeCoordination(
+            String rolePositionName,
+            String employeeOnOficial,
+            String userNameSystem,
+            String userPasswordSystem
+    ) {
+        this.rolePositionName = rolePositionName;
+        this.employeeOnOficial = employeeOnOficial;
+        this.userNameSystem = userNameSystem;
+        this.userPasswordSystem = userPasswordSystem;
+        getLevelPositionName();
+    }
+
+    public String getLevelPositionName() {
         return "N10";
     }
 
-    public String getRolePositionName() {
-        return rolePositionName;
-    }
-
-    // A coordinator should be promoted
-    public void setRolePositionName(String rolePositionName) {
-        this.rolePositionName = rolePositionName;
-    }
-
+    // must be seen by the respective employee
     public String userNameSystem() {
       return userNameSystem;
     }

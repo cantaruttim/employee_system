@@ -1,4 +1,4 @@
-package br.com.cantarutti.model.enums;
+package br.com.cantarutti.enums;
 
 public enum EmployeeStatus {
     ACTIVE,
