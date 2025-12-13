@@ -1,5 +1,6 @@
 package br.com.cantarutti.service;
 
+import br.com.cantarutti.data.auth.ChangePasswordRequest;
 import br.com.cantarutti.data.auth.LoginRequest;
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.model.department.EmployeeCoordination;
@@ -68,4 +69,25 @@ public class UserService {
 
         return ResponseEntity.ok("Login successful");
     }
+
+
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+
+        UserEmployee user = userRepo.findById(request.getUserName())
+                .orElseThrow(() ->
+                        new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found")
+                );
+
+        boolean validOldPassword = passwordEncoder.matches(request.getOldPassword(), user.getUserNameSystem());
+        if (!validOldPassword) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is incorrect");
+        }
+
+        user.setUserPasswordSystem(passwordEncoder.encode(request.getNewPassword()));
+        user.setFirstLogin(false);
+        userRepo.save(user);
+
+        return ResponseEntity.ok("Password changed successfully.");
+    }
+
 }
