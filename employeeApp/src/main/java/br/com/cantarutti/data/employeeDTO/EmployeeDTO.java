@@ -134,4 +134,12 @@ public class EmployeeDTO {
     public void setLon(Double lon) {
         this.lon = lon;
     }
+
+    public EmployeeCoordinationDTO getEmployeeCoordinationDTO() {
+        return employeeCoordinationDTO;
+    }
+
+    public void setEmployeeCoordinationDTO(EmployeeCoordinationDTO employeeCoordinationDTO) {
+        this.employeeCoordinationDTO = employeeCoordinationDTO;
+    }
 }

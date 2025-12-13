@@ -46,13 +46,19 @@ public class EmployeeCoordination {
         this.employeeOnOficial = employeeOnOficial;
     }
 
-    // must be seen by the respective employee
-    public String userNameSystem() {
-      return userNameSystem;
+    public String getUserNameSystem() {
+        return userNameSystem;
     }
 
-    public String userPasswordSystem() {
-      return userPasswordSystem;
+    public void setUserNameSystem(String userNameSystem) {
+        this.userNameSystem = userNameSystem;
     }
 
+    public String getUserPasswordSystem() {
+        return userPasswordSystem;
+    }
+
+    public void setUserPasswordSystem(String userPasswordSystem) {
+        this.userPasswordSystem = userPasswordSystem;
+    }
 }

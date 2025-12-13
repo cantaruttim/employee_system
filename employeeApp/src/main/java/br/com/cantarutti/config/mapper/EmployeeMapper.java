@@ -1,8 +1,10 @@
 package br.com.cantarutti.config.mapper;
 
 import br.com.cantarutti.data.employeeDTO.EmployeeAddressDTO;
+import br.com.cantarutti.data.employeeDTO.EmployeeCoordinationDTO;
 import br.com.cantarutti.data.employeeDTO.EmployeeDTO;
 import br.com.cantarutti.data.employeeDTO.EmployeeFinanceInfoDTO;
+import br.com.cantarutti.model.department.EmployeeCoordination;
 import br.com.cantarutti.model.employee.Employee;
 import br.com.cantarutti.model.employee.EmployeeAddress;
 import br.com.cantarutti.model.employee.EmployeeFinanceInfo;
@@ -84,6 +86,15 @@ public class EmployeeMapper {
             finDTO.setRoleName(employee.getFinanceInfo().getRoleName());
             finDTO.setBaseSalary(employee.getFinanceInfo().getBaseSalary());
             dto.setFinanceInfo(finDTO);
+        }
+
+        // Coordination
+        if (employee.getEmployeeCoordination() != null) {
+            EmployeeCoordinationDTO coordDTO = new EmployeeCoordinationDTO();
+            coordDTO.setRolePositionName(employee.getEmployeeCoordination().getRolePositionName());
+            coordDTO.setEmployeeOnOficial(employee.getEmployeeCoordination().getEmployeeOnOficial());
+            coordDTO.setRolePositionName(employee.getEmployeeCoordination().getRolePositionName());
+            coordDTO.setUserPasswordSystem(employee.getEmployeeCoordination().getUserPasswordSystem());
         }
 
         return dto;
