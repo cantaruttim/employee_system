@@ -30,6 +30,13 @@ Here I used composition to implement and create an Employee. Because, MongoDB do
 
 After we create an Employee, we should see the User created on MongoDB
 
+The second main class of this program is the class `UserEmployee`. This class is used after the Employee is created.
+So, the User can log in on the login page.
+
+This class is the most complex one. Because we have some business rules related to that User
+1. The password is cryptographic
+2. We can change password
+3. The User only can log in, if that user is found on the Mongo database
 
 # Controllers
 
