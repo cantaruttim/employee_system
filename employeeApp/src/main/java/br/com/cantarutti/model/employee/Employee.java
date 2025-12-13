@@ -34,6 +34,34 @@ public class Employee {
     @Field("lon")
     private Double lon;
 
+    public Employee() {}
+
+    public Employee(
+            String id,
+            String registrationNumber,
+            String employeeName,
+            LocalDate dateContract,
+            String departmentLocated,
+            String levelPosition,
+            EmployeeStatus statusEmployee,
+            EmployeeAddress address,
+            EmployeeFinanceInfo financeInfo,
+            Double lat,
+            Double lon
+    ) {
+        this.id = id;
+        this.registrationNumber = registrationNumber;
+        this.employeeName = employeeName;
+        this.dateContract = dateContract;
+        this.departmentLocated = departmentLocated;
+        this.levelPosition = levelPosition;
+        this.statusEmployee = statusEmployee;
+        this.address = address;
+        this.financeInfo = financeInfo;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public String getId() {
         return id;
     }
