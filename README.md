@@ -26,7 +26,7 @@ a unique task. Those tasks are described on these `README`. The main specialized
 <i>developing</i>
 
 This system has two main models, `Employee` that is composed by `EmployeeAddress`, `EmployeeFinanceInfo`, `EmployeeCoordination`.
-Here I used composition to implement and create an Employee. Because, MongoDB do not work well with Relational information.
+Here I used composition to implement and create an Employee. Because, MongoDB does not work well with Relational information.
 
 After we create an Employee, we should see the User created on MongoDB
 
